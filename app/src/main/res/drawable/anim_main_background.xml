@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/bg">
+
+    <target
+        android:animation="@animator/group_rotate_1"
+        android:name="group_1"/>
+
+    <target
+        android:animation="@animator/group_rotate_2"
+        android:name="group_2"/>
+
+    <target
+        android:animation="@animator/group_rotate_3"
+        android:name="group_3"/>
+
+</animated-vector>

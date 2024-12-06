@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark"
+    tools:context=".ui.GameActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gameRightBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gameLeftBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/backToMainBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/arrow_back_dots"
+        app:layout_constrainedWidth="true"
+        app:titleTextColor="@color/grey_pale"
+        app:titleTextAppearance="@style/bigTextAppearance"
+        app:title="@string/game_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/gameFieldLines"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/field"
+        app:tint="@color/grey_pale"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toEndOf="@id/gameLeftBorder"
+        app:layout_constraintEnd_toStartOf="@id/gameRightBorder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <!--    TopLine-->
+    <ImageView
+        android:id="@+id/cell_1_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintDimensionRatio="1:1"
+        tools:src="@drawable/zero"
+        app:layout_constraintTop_toTopOf="@id/gameFieldLines"
+        app:layout_constraintStart_toStartOf="@id/gameFieldLines"
+        app:layout_constraintEnd_toStartOf="@id/cell_1_2"
+        app:layout_constraintBottom_toTopOf="@id/cell_2_1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <ImageView
+        android:id="@+id/cell_1_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        tools:src="@drawable/zero"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/cell_1_1"
+        app:layout_constraintStart_toEndOf="@id/cell_1_1"
+        app:layout_constraintEnd_toStartOf="@id/cell_1_3"
+        app:layout_constraintBottom_toBottomOf="@id/cell_1_1"/>
+
+    <ImageView
+        android:id="@+id/cell_1_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        tools:src="@drawable/anim_cross_rotate"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/cell_1_2"
+        app:layout_constraintStart_toEndOf="@id/cell_1_2"
+        app:layout_constraintEnd_toEndOf="@id/gameFieldLines"
+        app:layout_constraintBottom_toBottomOf="@id/cell_1_2"/>
+
+    <!--    MiddleLine-->
+    <ImageView
+        android:id="@+id/cell_2_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        tools:src="@drawable/zero"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/cell_1_1"
+        app:layout_constraintStart_toStartOf="@id/gameFieldLines"
+        app:layout_constraintEnd_toStartOf="@id/cell_2_2"
+        app:layout_constraintBottom_toTopOf="@id/cell_3_1"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <ImageView
+        android:id="@+id/cell_2_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        tools:src="@drawable/anim_cross_rotate"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/cell_2_1"
+        app:layout_constraintStart_toEndOf="@id/cell_2_1"
+        app:layout_constraintEnd_toStartOf="@id/cell_2_3"
+        app:layout_constraintBottom_toBottomOf="@id/cell_2_1"/>
+
+    <ImageView
+        android:id="@+id/cell_2_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        tools:src="@drawable/zero"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/cell_2_2"
+        app:layout_constraintStart_toEndOf="@id/cell_2_2"
+        app:layout_constraintEnd_toEndOf="@id/gameFieldLines"
+        app:layout_constraintBottom_toBottomOf="@id/cell_2_2"/>
+
+    <!--    BottomLine-->
+    <ImageView
+        android:id="@+id/cell_3_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintDimensionRatio="1:1"
+        tools:src="@drawable/anim_cross_rotate"
+        app:layout_constraintTop_toBottomOf="@id/cell_2_1"
+        app:layout_constraintStart_toStartOf="@id/gameFieldLines"
+        app:layout_constraintEnd_toStartOf="@id/cell_1_2"
+        app:layout_constraintBottom_toBottomOf="@id/gameFieldLines"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <ImageView
+        android:id="@+id/cell_3_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        tools:src="@drawable/zero"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/cell_3_1"
+        app:layout_constraintStart_toEndOf="@id/cell_3_1"
+        app:layout_constraintEnd_toStartOf="@id/cell_3_3"
+        app:layout_constraintBottom_toBottomOf="@id/cell_3_1"/>
+
+    <ImageView
+        android:id="@+id/cell_3_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        tools:src="@drawable/zero"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="@id/cell_3_2"
+        app:layout_constraintStart_toEndOf="@id/cell_3_2"
+        app:layout_constraintEnd_toEndOf="@id/gameFieldLines"
+        app:layout_constraintBottom_toBottomOf="@id/cell_3_2"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/restartGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:tint="?attr/colorOnPrimary"
+        android:backgroundTint="?attr/colorSecondary"
+        app:srcCompat="@drawable/restart_game"
+        app:maxImageSize="30dp"
+        android:layout_marginTop="@dimen/classic_text_44sp"
+        android:contentDescription="@string/restart_game"
+        app:layout_constraintStart_toStartOf="@id/cell_3_3"
+        app:layout_constraintEnd_toStartOf="@id/gameRightBorder"
+        app:layout_constraintTop_toBottomOf="@id/gameFieldLines" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

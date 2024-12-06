@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CrossVsZero</string>
+    <string name="main_title">CROSS vs ZERO</string>
+    <string name="main_exit">EXIT</string>
+    <string name="main_play">PLAY</string>
+    <string name="game_back">BACK TO MENU</string>
+    <string name="main_version">Version: alpha_1.0</string>
+    <string name="restart_game">restart game</string>
 </resources>

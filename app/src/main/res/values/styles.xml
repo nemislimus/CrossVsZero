@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="menuButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="shapeAppearance">@style/menuButtonAppearance</item>
+    </style>
+
+    <style name="menuButtonAppearance" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">@dimen/classic_size_8dp</item>
+    </style>
+
+    <style name="bigTextAppearance">
+        <item name="fontFamily">@font/prog</item>
+        <item name="android:textSize">@dimen/classic_text_22sp</item>
+        <item name="android:textFontWeight">400</item>
+    </style>
+
+</resources>

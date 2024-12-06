@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="classic_text_44sp">44sp</dimen>
+    <dimen name="classic_text_14sp">14sp</dimen>
+    <dimen name="classic_text_22sp">22sp</dimen>
+    <dimen name="classic_size_120dp">120dp</dimen>
+    <dimen name="classic_size_16dp">16dp</dimen>
+    <dimen name="classic_size_8dp">8dp</dimen>
+</resources>
