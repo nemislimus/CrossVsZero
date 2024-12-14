@@ -6,4 +6,5 @@
     <string name="game_back">BACK TO MENU</string>
     <string name="main_version">Version: alpha_1.0</string>
     <string name="restart_game">restart game</string>
+    <string name="version_click_message">ENJOY THE GAME!</string>
 </resources>

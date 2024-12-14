@@ -1,6 +1,7 @@
-package com.nemislimus.crossvszero.root
+package com.nemislimus.crossvszero.ui
 
 import android.app.Application
+import com.nemislimus.crossvszero.di.dataModule
 import com.nemislimus.crossvszero.di.domainModule
 import com.nemislimus.crossvszero.di.presentationModule
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +14,11 @@ class CvzApp: Application() {
 
         startKoin {
             androidContext(this@CvzApp)
-            modules(domainModule, presentationModule)
+            modules(
+                dataModule,
+                domainModule,
+                presentationModule,
+            )
         }
     }
 }

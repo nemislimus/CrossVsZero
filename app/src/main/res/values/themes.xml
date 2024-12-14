@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <attr name="appBackgroundColor"/>
-    <attr name="elementColor"/>
+    <attr name="elementColorGrey"/>
 
     <style name="Base.Theme.CrossVsZero" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -9,8 +9,10 @@
     </style>
 
     <style name="Theme.CrossVsZero" parent="Base.Theme.CrossVsZero">
+        <item name="android:statusBarColor">@color/dark</item>
+        <item name="android:navigationBarColor">@color/dark</item>
         <item name="appBackgroundColor">@color/dark</item>
-        <item name="elementColor">@color/grey_pale</item>
+        <item name="elementColorGrey">@color/grey_pale</item>
         <item name="colorPrimary">@color/dark</item>
         <item name="colorOnPrimary">@color/grey_pale</item>
         <item name="colorSecondary">@color/crimson</item>

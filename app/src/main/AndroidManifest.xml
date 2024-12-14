@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".root.CvzApp"
+        android:name=".ui.CvzApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,10 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CrossVsZero"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.GameActivity"
-            android:exported="false"
-            android:screenOrientation="nosensor"/>
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
@@ -27,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
