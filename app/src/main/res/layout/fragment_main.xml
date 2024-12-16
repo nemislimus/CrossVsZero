@@ -38,7 +38,7 @@
         app:layout_constraintGuide_percent="0.1"/>
 
     <ImageView
-        android:id="@+id/mainBackgroundAnimated"
+        android:id="@+id/ivMainBackgroundAnimated"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha="0.05"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageTitle"
+        android:id="@+id/ivTitle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerInside"
@@ -63,7 +63,7 @@
         app:tint="@color/grey_pale" />
 
     <Button
-        android:id="@+id/playButton"
+        android:id="@+id/btnPlayButton"
         style="@style/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,11 +83,11 @@
         app:layout_constraintStart_toEndOf="@id/mainLeftBorder"
         app:layout_constraintEnd_toStartOf="@id/mainRightBorder"
         app:layout_constraintTop_toBottomOf="@id/mainTopBorder"
-        app:layout_constraintBottom_toTopOf="@id/exitButton"
+        app:layout_constraintBottom_toTopOf="@id/btnExitButton"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/exitButton"
+        android:id="@+id/btnExitButton"
         style="@style/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,11 +107,11 @@
         android:layout_marginTop="@dimen/classic_size_16dp"
         app:layout_constraintStart_toEndOf="@id/mainLeftBorder"
         app:layout_constraintEnd_toStartOf="@id/mainRightBorder"
-        app:layout_constraintTop_toBottomOf="@id/playButton"
+        app:layout_constraintTop_toBottomOf="@id/btnPlayButton"
         app:layout_constraintBottom_toBottomOf="@id/mainBottomBorder" />
 
     <TextView
-        android:id="@+id/mainVersion"
+        android:id="@+id/tvMainVersion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="0dp"

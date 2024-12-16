@@ -18,9 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BindingFragment<FragmentMainBinding>() {
 
-    private var fragmentBackgroundAnimation: AnimatedVectorDrawable? = null
     private val viewModel by viewModel<MainFragmentViewModel>()
-
 
     override fun createFragmentBinding(
         inflater: LayoutInflater,
@@ -31,13 +29,10 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.startBackAnimation(
-            binding.mainBackgroundAnimated.drawable as AnimatedVectorDrawable
-        )
+        setBackAnimation()
 
         // Play
-        binding.playButton.setOnClickListener {
+        binding.btnPlayButton.setOnClickListener {
             changeButtonColorOnClick(it)
             findNavController().navigate(
                 R.id.action_mainFragment_to_gameFragment
@@ -45,13 +40,13 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
         }
 
         // Exit
-        binding.exitButton.setOnClickListener {
+        binding.btnExitButton.setOnClickListener {
             changeButtonColorOnClick(it)
             requireActivity().finishAndRemoveTask()
         }
 
         // Click on version
-        binding.mainVersion.setOnClickListener {
+        binding.tvMainVersion.setOnClickListener {
             Toast.makeText(
                 requireContext(),
                 requireContext().getString(R.string.version_click_message),
@@ -73,8 +68,14 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
         }
     }
 
+    private fun setBackAnimation() {
+        viewModel.startBackAnimation(
+            binding.ivMainBackgroundAnimated.drawable as AnimatedVectorDrawable
+        )
+    }
+
     private fun restoreBackAnimation() {
-        binding.mainBackgroundAnimated.setImageDrawable(
+        binding.ivMainBackgroundAnimated.setImageDrawable(
             viewModel.restoreBackAnimation()
         )
     }
