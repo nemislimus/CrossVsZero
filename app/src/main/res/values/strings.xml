@@ -7,4 +7,9 @@
     <string name="main_version">Version: alpha_1.0</string>
     <string name="restart_game">restart game</string>
     <string name="version_click_message">ENJOY THE GAME!</string>
+    <string name="cross_turn">cross turn</string>
+    <string name="zero_turn">zero turn</string>
+    <string name="cross_wins">cross win</string>
+    <string name="zero_wins">zero win</string>
+    <string name="no_winner">no winner</string>
 </resources>

@@ -44,11 +44,12 @@
         tools:text="information text"
         android:textColor="@color/grey_pale"
         android:textAppearance="@style/bigTextAppearance"
+        android:textAllCaps="true"
         app:layout_constrainedWidth="true"
         android:layout_marginTop="@dimen/classic_size_24dp"
-        app:layout_constraintTop_toBottomOf="@id/tbGameToolBar"
         app:layout_constraintStart_toStartOf="@id/gameLeftBorder"
-        app:layout_constraintEnd_toEndOf="@id/gameRightBorder"/>
+        app:layout_constraintEnd_toEndOf="@id/gameRightBorder"
+        app:layout_constraintTop_toBottomOf="@id/ivGameFieldLines"/>
 
     <ImageView
         android:id="@+id/ivGameFieldLines"
@@ -188,10 +189,10 @@
         android:backgroundTint="?attr/colorSecondary"
         app:srcCompat="@drawable/restart_game"
         app:maxImageSize="30dp"
-        android:layout_marginTop="@dimen/classic_text_44sp"
+        android:layout_marginBottom="@dimen/classic_size_32dp"
         android:contentDescription="@string/restart_game"
-        app:layout_constraintStart_toStartOf="@id/cell_8"
+        app:layout_constraintStart_toStartOf="@id/gameLeftBorder"
         app:layout_constraintEnd_toStartOf="@id/gameRightBorder"
-        app:layout_constraintTop_toBottomOf="@id/ivGameFieldLines" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
