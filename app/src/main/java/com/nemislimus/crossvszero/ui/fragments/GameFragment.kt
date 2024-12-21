@@ -58,13 +58,14 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
     private fun setStartUiState() {
         animationFadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
         binding.fabRestartGameButton.hide()
-        binding.fabRestartGameButton.setOnClickListener { viewModel.resetField() }
+        binding.fabRestartGameButton.setOnClickListener { viewModel.resetFieldOnButtonClick() }
 
         viewModel.isZeroTurn().observe(viewLifecycleOwner) { value ->
             markOfTurn(value)
         }
 
         binding.tbGameToolBar.setOnClickListener {
+            viewModel.resetFieldOnExit()
             findNavController().navigateUp()
         }
     }

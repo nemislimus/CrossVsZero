@@ -73,10 +73,12 @@ class GameFragmentViewModel(
         }
     }
 
-    fun resetField() {
+    fun resetFieldOnButtonClick() {
         repository.resetField()
         setGameState(GameState.NewGame)
     }
+
+    fun resetFieldOnExit() = repository.resetField()
 
     fun whoIsFirst() {
         isZeroTurn.postValue(repository.whoIsFirst())
