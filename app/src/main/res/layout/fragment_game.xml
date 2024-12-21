@@ -5,7 +5,7 @@
     android:id="@+id/game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark"
+    android:background="?attr/appBackgroundColor"
     tools:context=".ui.fragments.GameFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -185,8 +185,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        app:tint="?attr/colorOnPrimary"
-        android:backgroundTint="?attr/colorSecondary"
+        app:tint="?attr/elementColorGrey"
+        android:backgroundTint="?attr/elementColorCrimson"
         app:srcCompat="@drawable/restart_game"
         app:maxImageSize="30dp"
         android:layout_marginBottom="@dimen/classic_size_32dp"

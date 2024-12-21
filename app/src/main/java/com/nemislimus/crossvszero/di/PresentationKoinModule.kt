@@ -13,6 +13,6 @@ val presentationModule = module {
     }
 
     viewModel {
-        GameFragmentViewModel()
+        GameFragmentViewModel(get())
     }
 }

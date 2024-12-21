@@ -3,10 +3,13 @@ package com.nemislimus.crossvszero.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nemislimus.crossvszero.domain.api.ClassicGameInteractor
 import com.nemislimus.crossvszero.ui.models.GameCell
 import com.nemislimus.crossvszero.ui.models.GameState
 
-class GameFragmentViewModel : ViewModel() {
+class GameFragmentViewModel(
+    private val classicInteractor: ClassicGameInteractor
+) : ViewModel() {
 
     private val gameField: MutableList<GameCell> = MutableList(9) { index -> GameCell(index) }
     private var playerCells: List<GameCell> = listOf()
@@ -81,11 +84,11 @@ class GameFragmentViewModel : ViewModel() {
 
     fun clickOnCell(index: Int) {
         val isZeroTurn = isZeroTurn.value
-        isZeroTurn?.let { turnValue ->
-            setFieldCellValue(index, turnValue)
-            if (winCheck(turnValue)) return
-            if (checkFieldFilling(turnValue)) return
-            setGameState(GameState.GameInProcess(playerCells, winCellsIndexes, turnValue))
+        isZeroTurn?.let { zeroTurn ->
+            setFieldCellValue(index, zeroTurn)
+            if (winCheck(zeroTurn)) return
+            if (checkFieldFilling(zeroTurn)) return
+            setGameState(GameState.GameInProcess(playerCells, winCellsIndexes, zeroTurn))
             switchPlayer()
         }
     }

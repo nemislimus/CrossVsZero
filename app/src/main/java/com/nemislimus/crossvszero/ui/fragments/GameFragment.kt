@@ -53,7 +53,6 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
                 setCellsOnClickListeners()
             }
         }
-
     }
 
     private fun setStartUiState() {
