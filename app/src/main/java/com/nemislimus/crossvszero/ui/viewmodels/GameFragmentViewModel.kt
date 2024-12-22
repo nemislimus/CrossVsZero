@@ -25,26 +25,26 @@ class GameFragmentViewModel(
         gameState.postValue(state)
     }
 
-    private fun winCheck(zeroTurn: Boolean): Boolean {
-        return if (repository.winCheck(zeroTurn)) {
+    private fun winCheck(): Boolean {
+        return if (repository.winCheck()) {
             setGameState(
                 GameState.GotWinner(
                     repository.getPlayerCells(),
                     repository.getWinCellsIndexes(),
-                    zeroTurn
+                    repository.isZeroTurn()
                 )
             )
             true
         } else false
     }
 
-    private fun checkFieldFilling(zeroTurn: Boolean): Boolean {
-        return if (repository.checkFieldFilling(zeroTurn)) {
+    private fun checkFieldFilling(): Boolean {
+        return if (repository.checkFieldFilling()) {
             setGameState(
                 GameState.NoWinner(
                     repository.getPlayerCells(),
                     repository.getWinCellsIndexes(),
-                    zeroTurn
+                    repository.isZeroTurn()
                 )
             )
             true
@@ -57,20 +57,17 @@ class GameFragmentViewModel(
     }
 
     fun clickOnCell(index: Int) {
-        val isZeroTurn = isZeroTurn.value
-        isZeroTurn?.let { zeroTurn ->
-            repository.setFieldCellValue(index, zeroTurn)
-            if (winCheck(zeroTurn)) return
-            if (checkFieldFilling(zeroTurn)) return
-            setGameState(
-                GameState.GameInProcess(
-                    repository.getPlayerCells(),
-                    repository.getWinCellsIndexes(),
-                    zeroTurn
-                )
+        repository.setFieldCellValue(index)
+        if (winCheck()) return
+        if (checkFieldFilling()) return
+        setGameState(
+            GameState.GameInProcess(
+                repository.getPlayerCells(),
+                repository.getWinCellsIndexes(),
+                repository.isZeroTurn()
             )
-            switchPlayer()
-        }
+        )
+        switchPlayer()
     }
 
     fun resetFieldOnButtonClick() {

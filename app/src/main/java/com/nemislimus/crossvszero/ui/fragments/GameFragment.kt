@@ -92,6 +92,7 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
             }
         }
     }
+
     private fun clearCellsClickListeners() {
         fieldCellsViews.forEach { cell ->
             cell.setOnClickListener(null)
@@ -127,14 +128,14 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
     }
 
     private fun updateGameField(cells: List<GameCell>, winCellsIndexes: List<Int>, zeroTurn: Boolean) {
-        drawCellsElement(
+        drawCellsElements(
             cells.map { it.index },
             winCellsIndexes,
             zeroTurn
         )
     }
 
-    private fun drawCellsElement(cells: List<Int>, winCellsIndexes: List<Int>, zeroTurn: Boolean) {
+    private fun drawCellsElements(cells: List<Int>, winCellsIndexes: List<Int>, zeroTurn: Boolean) {
         val drawable = choseDrawable(
             zeroTurn,
             R.drawable.zero,

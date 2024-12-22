@@ -10,16 +10,16 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
     private var isZeroTurn: Boolean = false
 //    private var turnCount: Int = 0
 
-    override fun setFieldCellValue(index: Int, zeroTurn: Boolean) {
-        if (zeroTurn) {
+    override fun setFieldCellValue(index: Int) {
+        if (isZeroTurn) {
             gameField[index] = GameCell(index, GameCell.ZERO_CELL)
         } else {
             gameField[index] = GameCell(index, GameCell.CROSS_CELL)
         }
     }
 
-    override fun winCheck(zeroTurn: Boolean): Boolean {
-        playerCells = getChosenCells(zeroTurn)
+    override fun winCheck(): Boolean {
+        playerCells = getChosenCells()
         return checkWinMarkers(playerCells)
     }
 
@@ -27,7 +27,7 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
 
     override fun getWinCellsIndexes(): List<Int> = winCellsIndexes
 
-    override fun checkFieldFilling(zeroTurn: Boolean): Boolean {
+    override fun checkFieldFilling(): Boolean {
         val fieldValuesList = gameField.map { it.value }
         val indexOfEmpty = fieldValuesList.indexOfFirst { value -> value == GameCell.EMPTY_CELL }
         return indexOfEmpty == -1
@@ -53,8 +53,8 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
         isZeroTurn = !isZeroTurn
     }
 
-    private fun getChosenCells(zeroTurn: Boolean): List<GameCell> {
-        return if (zeroTurn) {
+    private fun getChosenCells(): List<GameCell> {
+        return if (isZeroTurn) {
             gameField.filter { cell -> cell.value == GameCell.ZERO_CELL }
         } else {
             gameField.filter { cell -> cell.value == GameCell.CROSS_CELL }
