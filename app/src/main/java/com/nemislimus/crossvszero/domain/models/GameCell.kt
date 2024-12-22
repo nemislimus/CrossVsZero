@@ -1,4 +1,4 @@
-package com.nemislimus.crossvszero.ui.models
+package com.nemislimus.crossvszero.domain.models
 
 
 data class GameCell(

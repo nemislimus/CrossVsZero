@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nemislimus.crossvszero.R
 import com.nemislimus.crossvszero.databinding.FragmentGameBinding
-import com.nemislimus.crossvszero.ui.models.GameCell
+import com.nemislimus.crossvszero.domain.models.GameCell
 import com.nemislimus.crossvszero.ui.models.GameState
 import com.nemislimus.crossvszero.ui.viewmodels.GameFragmentViewModel
 import com.nemislimus.crossvszero.utils.BindingFragment

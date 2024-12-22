@@ -1,6 +1,6 @@
 package com.nemislimus.crossvszero.domain.api
 
-import com.nemislimus.crossvszero.ui.models.GameCell
+import com.nemislimus.crossvszero.domain.models.GameCell
 
 interface ClassicGameRepository {
     fun whoIsFirst(): Boolean

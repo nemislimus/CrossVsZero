@@ -1,7 +1,7 @@
 package com.nemislimus.crossvszero.data
 
 import com.nemislimus.crossvszero.domain.api.ClassicGameRepository
-import com.nemislimus.crossvszero.ui.models.GameCell
+import com.nemislimus.crossvszero.domain.models.GameCell
 
 class ClassicGameRepositoryImpl : ClassicGameRepository {
     private val gameField: MutableList<GameCell> = MutableList(9) { index -> GameCell(index) }

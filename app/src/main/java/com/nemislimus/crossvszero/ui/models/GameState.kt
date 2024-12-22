@@ -1,5 +1,7 @@
 package com.nemislimus.crossvszero.ui.models
 
+import com.nemislimus.crossvszero.domain.models.GameCell
+
 sealed interface GameState {
 
     data object NewGame: GameState
