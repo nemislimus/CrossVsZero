@@ -60,6 +60,7 @@ class GameFragmentViewModel(
         repository.setFieldCellValue(index)
         if (winCheck()) return
         if (checkFieldFilling()) return
+
         setGameState(
             GameState.GameInProcess(
                 repository.getPlayerCells(),

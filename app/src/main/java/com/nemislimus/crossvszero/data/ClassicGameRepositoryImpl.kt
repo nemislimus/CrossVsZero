@@ -27,6 +27,17 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
 
     override fun getWinCellsIndexes(): List<Int> = winCellsIndexes
 
+    override fun getWeakElementIndex(): Int {
+        val currentPlayerCells = getChosenCells(!isZeroTurn)
+        val weakCellList = currentPlayerCells.filter { cell -> cell.countdown == WEAK_CELL_MARKER }
+        return if (weakCellList.size == 1) {
+            weakCellList[0].index
+        } else {
+            NO_WEAK_INDEX
+        }
+    }
+    //////////////////////////////////////////////////////////////////
+
     override fun checkFieldFilling(): Boolean {
         val fieldValuesList = gameField.map { it.value }
         val indexOfEmpty = fieldValuesList.indexOfFirst { value -> value == GameCell.EMPTY_CELL }
@@ -53,8 +64,8 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
         isZeroTurn = !isZeroTurn
     }
 
-    private fun getChosenCells(): List<GameCell> {
-        return if (isZeroTurn) {
+    private fun getChosenCells(zeroTurn: Boolean = isZeroTurn): List<GameCell> {
+        return if (zeroTurn) {
             gameField.filter { cell -> cell.value == GameCell.ZERO_CELL }
         } else {
             gameField.filter { cell -> cell.value == GameCell.CROSS_CELL }
@@ -75,7 +86,7 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
 
     companion object {
         // List of win index sets
-        val WIN_MARKERS = listOf(
+        private val WIN_MARKERS = listOf(
             setOf(0,1,2),
             setOf(3,4,5),
             setOf(6,7,8),
@@ -85,5 +96,8 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
             setOf(0,4,8),
             setOf(2,4,6),
         )
+
+        const val WEAK_CELL_MARKER = 6
+        private const val NO_WEAK_INDEX = -1
     }
 }

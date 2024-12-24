@@ -9,6 +9,7 @@ interface ClassicGameRepository {
     fun winCheck(): Boolean
     fun getPlayerCells(): List<GameCell>
     fun getWinCellsIndexes(): List<Int>
+    fun getWeakElementIndex(): Int
     fun checkFieldFilling(): Boolean
     fun resetField()
     fun switchPlayer()

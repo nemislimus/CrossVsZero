@@ -4,7 +4,7 @@ package com.nemislimus.crossvszero.domain.models
 data class GameCell(
     val index: Int,
     val value: Int = EMPTY_CELL,
-    val countdown: Int = 0
+    val countdown: Int = 1
 ) {
     companion object {
         const val EMPTY_CELL = 2

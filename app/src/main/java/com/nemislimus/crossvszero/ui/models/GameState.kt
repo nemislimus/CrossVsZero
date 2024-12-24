@@ -9,6 +9,7 @@ sealed interface GameState {
     data class GameInProcess(
         val cells: List<GameCell>,
         val winCellsIndexes: List<Int>,
+        val weak: List<Int>,
         val zeroTurn: Boolean = true
     ) : GameState
 
