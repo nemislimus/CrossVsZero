@@ -4,18 +4,20 @@ import com.nemislimus.crossvszero.domain.api.ClassicGameRepository
 import com.nemislimus.crossvszero.domain.models.GameCell
 
 class ClassicGameRepositoryImpl : ClassicGameRepository {
-    private val gameField: MutableList<GameCell> = MutableList(9) { index -> GameCell(index) }
+    private val gameField: MutableList<GameCell> = MutableList(FIELD_CELLS_NUMBER) { index -> GameCell(index) }
     private var playerCells: List<GameCell> = listOf()
     private var winCellsIndexes: List<Int> = listOf()
     private var isZeroTurn: Boolean = false
-//    private var turnCount: Int = 0
 
-    override fun setFieldCellValue(index: Int) {
+    override fun setFieldCellValue(cellIndex: Int) {
         if (isZeroTurn) {
-            gameField[index] = GameCell(index, GameCell.ZERO_CELL)
+            gameField[cellIndex] = GameCell(cellIndex, GameCell.ZERO_CELL)
         } else {
-            gameField[index] = GameCell(index, GameCell.CROSS_CELL)
+            gameField[cellIndex] = GameCell(cellIndex, GameCell.CROSS_CELL)
         }
+
+        val playerCellsIndexList = getChosenCells().map { cell -> cell.index }
+        updateCellsCountdown(playerCellsIndexList)
     }
 
     override fun winCheck(): Boolean {
@@ -28,15 +30,16 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
     override fun getWinCellsIndexes(): List<Int> = winCellsIndexes
 
     override fun getWeakElementIndex(): Int {
-        val currentPlayerCells = getChosenCells(!isZeroTurn)
-        val weakCellList = currentPlayerCells.filter { cell -> cell.countdown == WEAK_CELL_MARKER }
-        return if (weakCellList.size == 1) {
-            weakCellList[0].index
+        val anotherPlayerCells = getChosenCells(!isZeroTurn)
+        val weakElementList = anotherPlayerCells.filter { cell -> cell.countdown == WEAK_CELL_MARKER }
+        return if (weakElementList.isNotEmpty()) {
+            val weakElementIndex = weakElementList[0].index
+            gameField[weakElementIndex] = GameCell(weakElementIndex, GameCell.EMPTY_CELL)
+            weakElementIndex
         } else {
             NO_WEAK_INDEX
         }
     }
-    //////////////////////////////////////////////////////////////////
 
     override fun checkFieldFilling(): Boolean {
         val fieldValuesList = gameField.map { it.value }
@@ -45,7 +48,7 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
     }
 
     override fun resetField() {
-        val clearField = gameField.map { it.copy(index = it.index, value = GameCell.EMPTY_CELL) }
+        val clearField = MutableList(FIELD_CELLS_NUMBER) { index -> GameCell(index) }
         gameField.clear()
         gameField.addAll(clearField)
         playerCells = listOf()
@@ -84,8 +87,20 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
         return false
     }
 
+    private fun updateCellsCountdown(playerCellsIndexList: List<Int>) {
+        gameField.forEachIndexed { index, gameCell ->
+            if (playerCellsIndexList.contains(index)) {
+                val newCount = gameCell.countdown + 1
+                gameField[index] = GameCell(
+                    index,
+                    gameCell.value,
+                    newCount
+                )
+            }
+        }
+    }
+
     companion object {
-        // List of win index sets
         private val WIN_MARKERS = listOf(
             setOf(0,1,2),
             setOf(3,4,5),
@@ -97,7 +112,8 @@ class ClassicGameRepositoryImpl : ClassicGameRepository {
             setOf(2,4,6),
         )
 
-        const val WEAK_CELL_MARKER = 6
+        const val FIELD_CELLS_NUMBER = 9
+        const val WEAK_CELL_MARKER = 3
         private const val NO_WEAK_INDEX = -1
     }
 }

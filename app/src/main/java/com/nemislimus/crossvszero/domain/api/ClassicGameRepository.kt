@@ -5,7 +5,7 @@ import com.nemislimus.crossvszero.domain.models.GameCell
 interface ClassicGameRepository {
     fun whoIsFirst(): Boolean
     fun isZeroTurn(): Boolean
-    fun setFieldCellValue(index: Int)
+    fun setFieldCellValue(cellIndex: Int)
     fun winCheck(): Boolean
     fun getPlayerCells(): List<GameCell>
     fun getWinCellsIndexes(): List<Int>

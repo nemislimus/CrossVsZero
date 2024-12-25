@@ -87,10 +87,18 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
         fieldCellsViews.forEachIndexed { index, cell ->
             cell.setOnClickListener {
                 if (cell.drawable == null) {
-                    viewModel.clickOnCell(index)
+                    clickOnCell(index)
                 }
             }
         }
+    }
+
+    private fun clickOnCell(index: Int) {
+        val weakElementIndex = viewModel.weakElementIndex
+        weakElementIndex?.let {
+            fieldCellsViews[it].setImageDrawable(null)
+        }
+        viewModel.clickOnCell(index)
     }
 
     private fun clearCellsClickListeners() {
@@ -100,11 +108,27 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
     }
 
     private fun renderField(state: GameState) {
-        when(state) {
-            is GameState.GotWinner -> showEndGame(state.cells, state.winCellsIndexes, state.zeroTurn)
-            is GameState.GameInProcess -> updateGameField(state.cells, state.winCellsIndexes, state.zeroTurn)
+        when (state) {
             GameState.NewGame -> prepareNewField()
-            is GameState.NoWinner -> showEndGame(state.cells, state.winCellsIndexes, state.zeroTurn)
+
+            is GameState.GotWinner -> showEndGame(
+                state.cells,
+                state.winCellsIndexes,
+                state.zeroTurn
+            )
+
+            is GameState.GameInProcess -> updateGameField(
+                state.cells,
+                state.winCellsIndexes,
+                state.zeroTurn,
+                state.weakElementIndex
+            )
+
+            is GameState.NoWinner -> showEndGame(
+                state.cells,
+                state.winCellsIndexes,
+                state.zeroTurn
+            )
         }
     }
 
@@ -127,7 +151,23 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
         }
     }
 
-    private fun updateGameField(cells: List<GameCell>, winCellsIndexes: List<Int>, zeroTurn: Boolean) {
+    private fun updateGameField(
+        cells: List<GameCell>,
+        winCellsIndexes: List<Int>,
+        zeroTurn: Boolean,
+        weakCellIndex: Int = -1
+    ) {
+        if (weakCellIndex != -1) {
+            val animatedDrawable = choseDrawable(
+                !zeroTurn,
+                R.drawable.anim_zero_scale_down,
+                R.drawable.anim_cross_scale_down
+            )
+
+            (animatedDrawable as? AnimatedVectorDrawable)?.start()
+            fieldCellsViews[weakCellIndex].setImageDrawable(animatedDrawable)
+        }
+
         drawCellsElements(
             cells.map { it.index },
             winCellsIndexes,

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/cross_red"
+    android:keepScreenOn="false">
+
+    <target
+        android:animation="@animator/element_scale_down_x"
+        android:name="red_cross"/>
+
+    <target
+        android:animation="@animator/element_scale_down_y"
+        android:name="red_cross"/>
+
+</animated-vector>

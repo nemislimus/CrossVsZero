@@ -4,14 +4,14 @@
     android:viewportWidth="1.803"
     android:viewportHeight="1.803">
 
-  <group android:name="simple_cross"
+  <group android:name="red_cross"
       android:scaleX="1"
       android:scaleY="1"
       android:rotation="0"
       android:pivotX="0.901"
       android:pivotY="0.901">
     <path
-        android:fillColor="@color/grey_pale"
+        android:fillColor="@color/crimson"
         android:pathData="M1.463,0.339l0,0c-0.013,-0.013 -0.034,-0.013 -0.047,0l-0.515,0.515 -0.515,-0.515c-0.013,-0.013 -0.034,-0.013 -0.047,0l0,0c-0.013,0.013 -0.013,0.034 0,0.047l0.515,0.515 -0.515,0.515c-0.013,0.013 -0.013,0.034 0,0.047l0,0c0.013,0.013 0.034,0.013 0.047,0l0.515,-0.515 0.515,0.515c0.013,0.013 0.034,0.013 0.047,0l0,0c0.013,-0.013 0.013,-0.034 0,-0.047l-0.515,-0.515 0.515,-0.515c0.013,-0.013 0.013,-0.034 0,-0.047z"/>
 
   </group>
