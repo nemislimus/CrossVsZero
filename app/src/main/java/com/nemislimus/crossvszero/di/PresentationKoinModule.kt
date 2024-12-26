@@ -2,6 +2,7 @@ package com.nemislimus.crossvszero.di
 
 import com.nemislimus.crossvszero.ui.viewmodels.GameFragmentViewModel
 import com.nemislimus.crossvszero.ui.viewmodels.MainFragmentViewModel
+import com.nemislimus.crossvszero.ui.viewmodels.PlayersFragmentViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -14,5 +15,9 @@ val presentationModule = module {
 
     viewModel {
         GameFragmentViewModel(get())
+    }
+
+    viewModel {
+        PlayersFragmentViewModel()
     }
 }
