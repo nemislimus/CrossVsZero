@@ -33,6 +33,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <TextView
+        android:id="@+id/tvNoPlayersText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player_list_is_empty"
+        android:textColor="@color/crimson"
+        android:textAppearance="@style/bigTextAppearance"
+        android:layout_marginTop="@dimen/classic_size_32dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleBottomSheet"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlayersList"
@@ -43,6 +56,7 @@
         android:layout_marginTop="@dimen/classic_size_24dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitleBottomSheet"

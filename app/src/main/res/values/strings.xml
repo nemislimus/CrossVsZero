@@ -17,4 +17,13 @@
     <string name="name">Name:</string>
     <string name="victories">Victories:</string>
     <string name="defeats">Defeats:</string>
+    <string name="player_list_is_empty">PLAYER LIST IS EMPTY</string>
+    <string name="x_player">X-PLAYER:</string>
+    <string name="o_player">O-PLAYER:</string>
+    <string name="add_x_player_description">add x-player</string>
+    <string name="add_o_player_description">add o-player</string>
+    <string name="clear_x_player_description">clear x-player</string>
+    <string name="clear_o_player_description">clear o-player</string>
+    <string name="start">START</string>
+    <string name="enter_new_player_name">New player name</string>
 </resources>

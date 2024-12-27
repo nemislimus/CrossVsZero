@@ -46,7 +46,8 @@
         <Switch
             android:id="@+id/swChoiceSwitch"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/classic_size_48dp"
+            android:checked="false"
             android:textColor="?attr/elementColorGrey"
             android:text="@string/select_players"
             android:textSize="@dimen/classic_text_14sp"
@@ -59,7 +60,225 @@
             app:layout_constraintTop_toBottomOf="@id/tbPlayersToolBar"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+        <TextView
+            android:id="@+id/tvXPlayer"
+            app:layout_constraintTag="x_player"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:gravity="center_vertical"
+            android:text="@string/x_player"
+            android:maxLines="1"
+            android:textColor="@color/grey_pale"
+            android:layout_marginTop="@dimen/classic_size_16dp"
+            android:textSize="@dimen/classic_text_14sp"
+            android:textAppearance="@style/bigTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/playersLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/swChoiceSwitch"/>
+
+        <TextView
+            android:id="@+id/tvXPlayerValue"
+            app:layout_constraintTag="x_player_value"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:gravity="center_vertical"
+            tools:text="SomeGamerNameSomeGamerNameSomeGamerName"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/crimson"
+            android:textSize="@dimen/classic_text_14sp"
+            android:textAppearance="@style/bigTextAppearance"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constrainedWidth="true"
+            android:layout_marginHorizontal="@dimen/classic_size_8dp"
+            app:layout_constraintStart_toEndOf="@id/tvXPlayer"
+            app:layout_constraintTop_toTopOf="@id/tvXPlayer"
+            app:layout_constraintBottom_toBottomOf="@id/tvXPlayer"
+            app:layout_constraintEnd_toStartOf="@id/ivAddCrossPlayer"/>
+
+        <ImageView
+            android:id="@+id/ivAddCrossPlayer"
+            app:layout_constraintTag="add_x_player"
+            android:layout_width="@dimen/classic_size_32dp"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:src="@drawable/add_24"
+            android:scaleType="center"
+            android:contentDescription="@string/add_x_player_description"
+            app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
+            app:layout_constraintTop_toTopOf="@id/tvXPlayer"
+            app:layout_constraintBottom_toBottomOf="@id/tvXPlayer"/>
+
+        <ImageView
+            android:id="@+id/ivClearCrossPlayer"
+            app:layout_constraintTag="clear_x_player"
+            android:layout_width="@dimen/classic_size_32dp"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:src="@drawable/clear_24"
+            android:scaleType="center"
+            android:visibility="gone"
+            android:contentDescription="@string/clear_x_player_description"
+            app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
+            app:layout_constraintTop_toTopOf="@id/tvXPlayer"
+            app:layout_constraintBottom_toBottomOf="@id/tvXPlayer"/>
+
+        <TextView
+            android:id="@+id/tvOPlayer"
+            app:layout_constraintTag="o_player"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:gravity="center_vertical"
+            android:text="@string/o_player"
+            android:maxLines="1"
+            android:textColor="@color/grey_pale"
+            android:layout_marginTop="@dimen/classic_size_16dp"
+            android:textSize="@dimen/classic_text_14sp"
+            android:textAppearance="@style/bigTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/playersLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/tvXPlayer"/>
+
+        <TextView
+            android:id="@+id/tvOPlayerValue"
+            app:layout_constraintTag="o_player_value"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:gravity="center_vertical"
+            tools:text="SomeGamerNameSomeGamerNameSomeGamerName"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/crimson"
+            android:textSize="@dimen/classic_text_14sp"
+            android:textAppearance="@style/bigTextAppearance"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constrainedWidth="true"
+            android:layout_marginHorizontal="@dimen/classic_size_8dp"
+            app:layout_constraintStart_toEndOf="@id/tvOPlayer"
+            app:layout_constraintTop_toTopOf="@id/tvOPlayer"
+            app:layout_constraintBottom_toBottomOf="@id/tvOPlayer"
+            app:layout_constraintEnd_toStartOf="@id/ivAddZeroPlayer"/>
+
+        <ImageView
+            android:id="@+id/ivAddZeroPlayer"
+            app:layout_constraintTag="add_o_player"
+            android:layout_width="@dimen/classic_size_32dp"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:src="@drawable/add_24"
+            android:scaleType="center"
+            android:contentDescription="@string/add_o_player_description"
+            app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
+            app:layout_constraintTop_toTopOf="@id/tvOPlayer"
+            app:layout_constraintBottom_toBottomOf="@id/tvOPlayer"/>
+
+        <ImageView
+            android:id="@+id/ivClearZeroPlayer"
+            app:layout_constraintTag="clear_o_player"
+            android:layout_width="@dimen/classic_size_32dp"
+            android:layout_height="@dimen/classic_size_32dp"
+            android:src="@drawable/clear_24"
+            android:scaleType="center"
+            android:visibility="gone"
+            android:contentDescription="@string/clear_o_player_description"
+            app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
+            app:layout_constraintTop_toTopOf="@id/tvOPlayer"
+            app:layout_constraintBottom_toBottomOf="@id/tvOPlayer"/>
+
+        <Button
+            android:id="@+id/btnExitButton"
+            style="@style/menuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:padding="12dp"
+            android:text="@string/start"
+            android:textSize="@dimen/classic_text_22sp"
+            android:textColor="@color/grey_pale"
+            app:strokeColor="@color/grey_pale"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            android:fontFamily="@font/prog"
+            android:textFontWeight="300"
+            android:textAllCaps="false"
+            android:alpha="1"
+            android:layout_marginBottom="@dimen/classic_size_64dp"
+            app:layout_constraintStart_toEndOf="@id/playersLeftBorder"
+            app:layout_constraintEnd_toStartOf="@id/playersRightBorder"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCreatePlayerContainer"
+            app:layout_constraintTag="new_player_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/classic_size_56dp"
+            android:hint="@string/enter_new_player_name"
+            android:textColorHint="@color/grey_pale"
+            app:hintTextColor="@color/grey_pale"
+            app:boxStrokeColor="@color/player_create_field_stroke"
+            app:boxStrokeWidth="1dp"
+            android:layout_marginTop="@dimen/classic_size_32dp"
+            app:layout_constraintEnd_toStartOf="@id/ivCreatePlayerButton"
+            app:layout_constraintStart_toStartOf="@id/playersLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/tvOPlayer"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCreatePlayer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/smallTextAppearance"
+                android:textColor="@color/crimson"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:lines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/ivCreatePlayerButton"
+            app:layout_constraintTag="create_player_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@drawable/save"
+            android:scaleType="fitCenter"
+            android:alpha="0.3"
+            android:layout_marginTop="@dimen/classic_size_4dp"
+            android:contentDescription="@string/add_o_player_description"
+            app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
+            app:layout_constraintTop_toTopOf="@id/tilCreatePlayerContainer"
+            app:layout_constraintBottom_toBottomOf="@id/tilCreatePlayerContainer"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/grSelectPlayerInterface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_tags="x_player, o_player, x_player_value,
+            o_player_value, add_x_player, add_o_player, new_player_name, create_player_button" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/Veil"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/crimson"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/PlayerBottomSheetLayout"
+        layout="@layout/player_selection_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        app:behavior_draggable="true"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="520dp"
+        app:behavior_skipCollapsed="false"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

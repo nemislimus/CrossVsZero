@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/classic_size_16dp"
-    android:layout_marginEnd="@dimen/classic_size_16dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="@dimen/classic_size_24dp"
+    android:layout_marginEnd="@dimen/classic_size_24dp"
     android:layout_marginVertical="@dimen/classic_size_8dp"
     app:cardElevation="0dp"
     app:cardCornerRadius="@dimen/classic_size_8dp"
@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name"
+            android:maxLines="1"
             android:textColor="@color/grey_pale"
             android:layout_marginStart="@dimen/classic_size_16dp"
             android:layout_marginTop="@dimen/classic_size_8dp"
@@ -37,11 +38,28 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:id="@+id/tvNameValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            tools:text="SomeGamerName"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/crimson"
+            android:layout_marginStart="@dimen/classic_size_8dp"
+            android:layout_marginEnd="@dimen/classic_size_16dp"
+            android:textAppearance="@style/bigTextAppearance"
+            app:layout_constraintStart_toEndOf="@id/tvName"
+            app:layout_constraintTop_toTopOf="@id/tvName"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
             android:id="@+id/tvVictories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/victories"
             android:textColor="@color/grey_pale"
+            android:maxLines="1"
             android:layout_marginStart="@dimen/classic_size_16dp"
             android:layout_marginTop="@dimen/classic_size_4dp"
             android:textAppearance="@style/smallTextAppearance"
@@ -49,18 +67,51 @@
             app:layout_constraintTop_toBottomOf="@id/tvName"/>
 
         <TextView
+            android:id="@+id/tvVictoriesValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            tools:text="131456"
+            android:textColor="@color/grey_pale"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginStart="@dimen/classic_size_8dp"
+            android:layout_marginEnd="@dimen/classic_size_8dp"
+            android:textAppearance="@style/smallTextAppearance"
+            app:layout_constraintStart_toEndOf="@id/tvVictories"
+            app:layout_constraintTop_toTopOf="@id/tvVictories"
+            app:layout_constraintEnd_toStartOf="@id/glCenter"/>
+
+        <TextView
             android:id="@+id/tvDefeats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/defeats"
             android:textColor="@color/grey_pale"
-            android:layout_marginStart="@dimen/classic_size_16dp"
+            android:maxLines="1"
+            android:layout_marginStart="@dimen/classic_size_8dp"
             android:layout_marginTop="@dimen/classic_size_4dp"
             android:layout_marginBottom="@dimen/classic_size_8dp"
             android:textAppearance="@style/smallTextAppearance"
             app:layout_constraintStart_toStartOf="@id/glCenter"
             app:layout_constraintTop_toBottomOf="@id/tvName"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvDefeatsValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            tools:text="3648"
+            android:textColor="@color/grey_pale"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginStart="@dimen/classic_size_8dp"
+            android:layout_marginEnd="@dimen/classic_size_16dp"
+            android:textAppearance="@style/smallTextAppearance"
+            app:layout_constraintStart_toEndOf="@id/tvDefeats"
+            app:layout_constraintTop_toTopOf="@id/tvDefeats"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
 
