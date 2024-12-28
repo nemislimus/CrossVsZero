@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nemislimus.crossvszero.R
@@ -66,7 +67,10 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
 
         binding.tbGameToolBar.setOnClickListener {
             viewModel.resetFieldOnExit()
-            findNavController().navigateUp()
+            findNavController().popBackStack(
+                destinationId = R.id.mainFragment,
+                inclusive = false
+            )
         }
     }
 
@@ -215,6 +219,7 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
             viewModel.whoIsFirst()
             fabRestartGameButton.hide()
             fieldCellsViews.forEach { cell -> cell.setImageDrawable(null) }
+            ivGameFieldLines.isVisible = true
             ivGameFieldLines.startAnimation(animationFadeIn)
         }
     }

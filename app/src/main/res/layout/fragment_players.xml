@@ -50,7 +50,7 @@
             android:checked="false"
             android:textColor="?attr/elementColorGrey"
             android:text="@string/select_players"
-            android:textSize="@dimen/classic_text_14sp"
+            android:textSize="@dimen/classic_text_22sp"
             android:fontFamily="@font/prog"
             android:thumbTint="@color/select_players_switch_color"
             android:trackTint="@color/select_players_switch_color"
@@ -181,7 +181,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tvOPlayer"/>
 
         <Button
-            android:id="@+id/btnExitButton"
+            android:id="@+id/btnStart"
             style="@style/menuButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -242,6 +242,7 @@
             android:src="@drawable/save"
             android:scaleType="fitCenter"
             android:alpha="0.3"
+            android:clickable="false"
             android:layout_marginTop="@dimen/classic_size_4dp"
             android:contentDescription="@string/add_o_player_description"
             app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
@@ -252,7 +253,7 @@
             android:id="@+id/grSelectPlayerInterface"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             app:constraint_referenced_tags="x_player, o_player, x_player_value,
             o_player_value, add_x_player, add_o_player, new_player_name, create_player_button" />
 
