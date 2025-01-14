@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.bundle.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -221,6 +222,18 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
             fieldCellsViews.forEach { cell -> cell.setImageDrawable(null) }
             ivGameFieldLines.isVisible = true
             ivGameFieldLines.startAnimation(animationFadeIn)
+        }
+    }
+
+    companion object {
+        const val CROSS_PLAYER = "cross_player"
+        const val ZERO_PLAYER = "zero_player"
+
+        fun newInstance(newsId: Int) = GameFragment().apply {
+            arguments = bundleOf(
+                CROSS_PLAYER to newsId,
+                ZERO_PLAYER to newsId
+            )
         }
     }
 

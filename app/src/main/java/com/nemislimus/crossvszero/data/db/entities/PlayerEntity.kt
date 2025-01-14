@@ -2,12 +2,14 @@ package com.nemislimus.crossvszero.data.db.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.nemislimus.crossvszero.data.db.entities.PlayerEntity.Companion.TABLE_NAME
 import com.nemislimus.crossvszero.domain.models.Player
 
 @Entity(
-    tableName = TABLE_NAME
+    tableName = TABLE_NAME,
+    indices = [Index(value = ["player_name"], unique = true)]
 )
 data class PlayerEntity(
     @PrimaryKey(autoGenerate = true)
@@ -15,8 +17,8 @@ data class PlayerEntity(
 
     @ColumnInfo(name = "player_name")
     val playerName: String,
-    val victories: Int,
-    val defeats: Int,
+    val playerVictories: Int,
+    val playerDefeats: Int,
 ) {
 
     companion object {
@@ -24,18 +26,19 @@ data class PlayerEntity(
 
         fun PlayerEntity.entityToPlayer(): Player {
             return Player(
+                id = this.id,
                 name = this.playerName,
-                victories = this.victories,
-                defeats = this.defeats,
+                victories = this.playerVictories,
+                defeats = this.playerDefeats,
             )
         }
 
         fun Player.playerToEntity(): PlayerEntity {
             return PlayerEntity(
-                id = 0L,
+                id = this.id,
                 playerName = this.name,
-                victories = this.victories,
-                defeats = this.defeats,
+                playerVictories = this.victories,
+                playerDefeats = this.defeats,
             )
         }
     }

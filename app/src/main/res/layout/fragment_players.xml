@@ -102,6 +102,7 @@
             android:layout_height="@dimen/classic_size_32dp"
             android:src="@drawable/add_24"
             android:scaleType="center"
+            android:clickable="true"
             android:contentDescription="@string/add_x_player_description"
             app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
             app:layout_constraintTop_toTopOf="@id/tvXPlayer"
@@ -162,6 +163,7 @@
             android:layout_height="@dimen/classic_size_32dp"
             android:src="@drawable/add_24"
             android:scaleType="center"
+            android:clickable="true"
             android:contentDescription="@string/add_o_player_description"
             app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
             app:layout_constraintTop_toTopOf="@id/tvOPlayer"
@@ -194,12 +196,12 @@
             android:textColor="@color/grey_pale"
             app:strokeColor="@color/grey_pale"
             app:strokeWidth="1dp"
-            android:clickable="true"
+            android:enabled="true"
             android:fontFamily="@font/prog"
             android:textFontWeight="300"
             android:textAllCaps="false"
             android:alpha="1"
-            android:layout_marginBottom="@dimen/classic_size_64dp"
+            android:layout_marginBottom="@dimen/classic_size_128dp"
             app:layout_constraintStart_toEndOf="@id/playersLeftBorder"
             app:layout_constraintEnd_toStartOf="@id/playersRightBorder"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -215,6 +217,7 @@
             app:hintTextColor="@color/grey_pale"
             app:boxStrokeColor="@color/player_create_field_stroke"
             app:boxStrokeWidth="1dp"
+            app:cursorColor="@color/crimson"
             android:layout_marginTop="@dimen/classic_size_32dp"
             app:layout_constraintEnd_toStartOf="@id/ivCreatePlayerButton"
             app:layout_constraintStart_toStartOf="@id/playersLeftBorder"
@@ -229,7 +232,8 @@
                 android:textColor="@color/crimson"
                 android:imeOptions="actionDone"
                 android:inputType="text"
-                android:lines="1" />
+                android:lines="1"
+                android:cursorVisible="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -241,21 +245,43 @@
             app:layout_constraintDimensionRatio="1:1"
             android:src="@drawable/save"
             android:scaleType="fitCenter"
-            android:alpha="0.3"
-            android:clickable="false"
+            android:alpha="0.15"
             android:layout_marginTop="@dimen/classic_size_4dp"
             android:contentDescription="@string/add_o_player_description"
             app:layout_constraintEnd_toEndOf="@id/playersRightBorder"
             app:layout_constraintTop_toTopOf="@id/tilCreatePlayerContainer"
             app:layout_constraintBottom_toBottomOf="@id/tilCreatePlayerContainer"/>
 
+        <TextView
+            android:id="@+id/tvNewPlayerInfo"
+            app:layout_constraintTag="new_player_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            tools:text="FAILURE:\nPlayer already exists!"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/crimson"
+            android:textSize="@dimen/classic_text_14sp"
+            android:textAppearance="@style/bigTextAppearance"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constrainedWidth="true"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/classic_size_8dp"
+            app:layout_constraintStart_toEndOf="@id/playersLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/ivCreatePlayerButton"
+            app:layout_constraintEnd_toStartOf="@id/playersRightBorder"/>
+
+
+
         <androidx.constraintlayout.widget.Group
             android:id="@+id/grSelectPlayerInterface"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_tags="x_player, o_player, x_player_value,
-            o_player_value, add_x_player, add_o_player, new_player_name, create_player_button" />
+            o_player_value, add_x_player, add_o_player, new_player_name,
+            create_player_button" />
 
 
 
@@ -274,10 +300,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:visibility="gone"
+        android:visibility="visible"
         app:behavior_draggable="true"
-        app:behavior_hideable="false"
-        app:behavior_peekHeight="520dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="400dp"
         app:behavior_skipCollapsed="false"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 

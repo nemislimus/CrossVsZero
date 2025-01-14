@@ -1,6 +1,7 @@
 package com.nemislimus.crossvszero.data.db
 
 import com.nemislimus.crossvszero.data.db.dao.PlayersDao
+import com.nemislimus.crossvszero.data.db.entities.PlayerEntity
 import com.nemislimus.crossvszero.data.db.entities.PlayerEntity.Companion.entityToPlayer
 import com.nemislimus.crossvszero.data.db.entities.PlayerEntity.Companion.playerToEntity
 import com.nemislimus.crossvszero.domain.api.PlayersRepository
@@ -22,4 +23,11 @@ class PlayersRepositoryDatabaseImpl(
         return playersDao.getAllPlayers().map { it.entityToPlayer() }
     }
 
+    override suspend fun getPlayerByName(playerName: String): Player {
+        return playersDao.getPlayerByName(playerName).entityToPlayer()
+    }
+
+    override suspend fun updatePlayerInDatabase(player: Player) {
+        playersDao.updatePlayerInDatabase(player.playerToEntity())
+    }
 }

@@ -13,4 +13,5 @@
     <dimen name="classic_size_8dp">8dp</dimen>
     <dimen name="classic_size_4dp">4dp</dimen>
     <dimen name="classic_size_64dp">64dp</dimen>
+    <dimen name="classic_size_128dp">128dp</dimen>
 </resources>

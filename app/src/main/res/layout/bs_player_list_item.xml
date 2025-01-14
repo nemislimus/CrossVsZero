@@ -41,7 +41,6 @@
             android:id="@+id/tvNameValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             tools:text="SomeGamerName"
             android:maxLines="1"
             android:ellipsize="end"
