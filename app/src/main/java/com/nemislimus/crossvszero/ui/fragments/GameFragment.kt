@@ -52,7 +52,7 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setStartUiState()
+        setStartProperties()
 
         lifecycleScope.launch {
             withContext(Dispatchers.Main) {
@@ -67,7 +67,7 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
         }
     }
 
-    private fun setStartUiState() {
+    private fun setStartProperties() {
         crossPlayerName = requireArguments().getString(CROSS_PLAYER)
         zeroPlayerName = requireArguments().getString(ZERO_PLAYER)
         playersNamesExist = areNamesExist(crossPlayerName, zeroPlayerName)
@@ -88,7 +88,7 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
         }
     }
 
-    private fun areNamesExist(crossName:String?, zeroName: String?): Boolean {
+    private fun areNamesExist(crossName: String?, zeroName: String?): Boolean {
         return !crossName.isNullOrBlank() && !zeroName.isNullOrBlank()
     }
 
@@ -180,21 +180,28 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
     }
 
     private fun showEndGame(cells: List<GameCell>, winCellsIndexes: List<Int>, zeroTurn: Boolean) {
-        clearCellsClickListeners()
-        updateGameField(cells, winCellsIndexes, zeroTurn)
+        viewLifecycleOwner.lifecycleScope.launch {
+            clearCellsClickListeners()
+            updateGameField(cells, winCellsIndexes, zeroTurn)
 
-        with(binding) {
-            fabRestartGameButton.show()
-            fabRestartGameButton.startAnimation(animationFadeIn)
-            tvInfoText.setTextColor(requireContext().getColor(R.color.crimson))
-
-            val infoText = if (winCellsIndexes.isNotEmpty()) {
-                createMessageWithName(zeroTurn, true)
-            } else {
-                getString(R.string.no_winner)
+            val updatePlayerStatisticJob = launch(Dispatchers.IO) {
+                viewModel.savePlayersGameResults(zeroTurn)
             }
+            updatePlayerStatisticJob.join()
 
-            tvInfoText.text = infoText
+            with(binding) {
+                fabRestartGameButton.show()
+                fabRestartGameButton.startAnimation(animationFadeIn)
+                tvInfoText.setTextColor(requireContext().getColor(R.color.crimson))
+
+                val infoText = if (winCellsIndexes.isNotEmpty()) {
+                    createMessageWithName(zeroTurn, true)
+                } else {
+                    getString(R.string.no_winner)
+                }
+
+                tvInfoText.text = infoText
+            }
         }
     }
 
@@ -247,7 +254,11 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
         }
     }
 
-    private fun choseDrawable(zeroTurn: Boolean, @DrawableRes zeroId: Int, @DrawableRes crossId: Int): Drawable? {
+    private fun choseDrawable(
+        zeroTurn: Boolean,
+        @DrawableRes zeroId: Int,
+        @DrawableRes crossId: Int
+    ): Drawable? {
         return if (zeroTurn) {
             AppCompatResources.getDrawable(requireContext(), zeroId)
         } else {

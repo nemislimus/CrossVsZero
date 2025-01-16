@@ -40,6 +40,11 @@ class GameFragmentViewModel(
         }
     }
 
+    private suspend fun setPlayers(xName: String?, oName: String?) {
+        xName?.let { playerX = playersRepository.getPlayerByName(it) }
+        oName?.let { playerO = playersRepository.getPlayerByName(it) }
+    }
+
     private fun setGameState(state: GameState) {
         gameState.postValue(state)
     }
@@ -104,9 +109,21 @@ class GameFragmentViewModel(
         gameRepository.resetField()
     }
 
-    private suspend fun setPlayers(xName: String?, oName: String?) {
-        xName?.let { playerX = playersRepository.getPlayerByName(it) }
-        oName?.let { playerO = playersRepository.getPlayerByName(it) }
+    suspend fun savePlayersGameResults(zeroTurn: Boolean) {
+        if (zeroTurn) {
+            playerO = playerO?.let { it.copy(victories = it.victories + 1) }
+            playerX = playerX?.let { it.copy(defeats = it.defeats + 1) }
+            updatePlayersInDatabase()
+        } else {
+            playerX = playerX?.let { it.copy(victories = it.victories + 1) }
+            playerO = playerO?.let { it.copy(defeats = it.defeats + 1) }
+            updatePlayersInDatabase()
+        }
+    }
+
+    private suspend fun updatePlayersInDatabase() {
+        playerX?.let { playersRepository.updatePlayerInDatabase(it) }
+        playerO?.let { playersRepository.updatePlayerInDatabase(it) }
     }
 
     fun whoIsFirst() {
