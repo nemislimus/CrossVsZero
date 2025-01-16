@@ -304,7 +304,7 @@
         app:behavior_draggable="true"
         app:behavior_hideable="true"
         app:behavior_peekHeight="400dp"
-        app:behavior_skipCollapsed="true"
+        app:behavior_skipCollapsed="false"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
