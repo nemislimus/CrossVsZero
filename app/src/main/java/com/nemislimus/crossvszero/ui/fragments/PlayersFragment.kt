@@ -34,13 +34,15 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     private var playerNameTextWatcher: TextWatcher? = null
     private var createInfoJob: Job? = null
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var isClickAllowed = true
     private val viewModel by viewModel<PlayersFragmentViewModel>()
 
     private var players: MutableList<Player> = mutableListOf()
     private var playerX: Player? = null
     private var playerO: Player? = null
+    private var zeroPlayerWorkInProgress = false
 
-    private val playersAdapter = PlayersAdapter {}
+    private val playersAdapter = PlayersAdapter { if (clickDebounce()) selectPlayer(it) }
 
     override fun createFragmentBinding(
         inflater: LayoutInflater,
@@ -51,7 +53,6 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUiOnCreate()
         setClickListeners()
     }
@@ -68,12 +69,14 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
             state = BottomSheetBehavior.STATE_HIDDEN
         }
 
-        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_HIDDEN -> {
                         binding.Veil.isVisible = false
                     }
+
                     else -> {
                         binding.Veil.isVisible = true
                     }
@@ -85,13 +88,13 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
             }
         })
 
-
-
         playerNameTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
+
             override fun afterTextChanged(s: Editable?) {
                 activateCreatePlayerButton(s.isNullOrBlank())
             }
@@ -113,16 +116,18 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
 
         // PLAYERS SELECTION SWITCH
         binding.swChoiceSwitch.setOnCheckedChangeListener { _, checked ->
-            manageStartButtonEnabledState(!checked)
+            manageStartButtonEnableState(!checked)
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.openPlayerSelectionOption(checked)
             }
         }
 
+        // CLICK ON START
         binding.btnStart.setOnClickListener {
             changeStartButtonColorOnClick(it)
             findNavController().navigate(
-                R.id.action_playersFragment_to_gameFragment
+                R.id.action_playersFragment_to_gameFragment,
+                GameFragment.createArguments(playerX?.name, playerO?.name)
             )
         }
 
@@ -132,38 +137,38 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
 
 
         binding.ivCreatePlayerButton.setOnClickListener {
-            changeSavePlayerButtonColorOnClick(it)
-            viewLifecycleOwner.lifecycleScope.launch {
-                val playerExist = isPlayerExist()
-                showCreateMessage(playerExist)
-                if (!playerExist) {
-
-                    val newPlayersList = async(Dispatchers.IO) {
-                        viewModel.savePlayer(binding.etCreatePlayer.text.toString().trim())
-                        viewModel.getPlayers().toMutableList()
-                    }
-
-                    players = newPlayersList.await()
-                    updateAdapterPlayers()
-                    binding.etCreatePlayer.text = null
-                    hideKeyboard()
-                }
+            if (clickDebounce()) {
+                changeSavePlayerButtonColorOnClick(it)
+                clickOnSavePlayerButton()
             }
         }
 
         binding.ivAddCrossPlayer.setOnClickListener {
-            hideKeyboard()
+            zeroPlayerWorkInProgress = false
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            hideKeyboard()
+        }
+
+        binding.ivClearCrossPlayer.setOnClickListener {
+            zeroPlayerWorkInProgress = false
+            clearSelectedPlayer()
         }
 
         binding.ivAddZeroPlayer.setOnClickListener {
-            hideKeyboard()
+            zeroPlayerWorkInProgress = true
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            hideKeyboard()
         }
+
+        binding.ivClearZeroPlayer.setOnClickListener {
+            zeroPlayerWorkInProgress = true
+            clearSelectedPlayer()
+        }
+
     }
 
     private fun render(state: PlayersState) {
-        when(state) {
+        when (state) {
             PlayersState.SelectDisable -> showSelectionDisable()
             is PlayersState.SelectEnable -> showSelectionEnable(state.players)
         }
@@ -171,8 +176,14 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
 
     private fun showSelectionDisable() {
         hideKeyboard()
+        clearSelectionInterface()
+    }
+
+    private fun clearSelectionInterface() {
         with(binding) {
             grSelectPlayerInterface.isVisible = false
+            ivClearZeroPlayer.isVisible = false
+            ivClearCrossPlayer.isVisible = false
             tvXPlayerValue.text = null
             tvOPlayerValue.text = null
             tvNewPlayerInfo.text = null
@@ -186,25 +197,89 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     private fun showSelectionEnable(allPlayersFromDb: List<Player>) {
         players.addAll(allPlayersFromDb)
         binding.grSelectPlayerInterface.isVisible = true
-        configurePlayerListState()
+        configureBottomSheetViews()
     }
 
 
-    private fun configurePlayerListState(playersList: MutableList<Player> = players) {
+    private fun configureBottomSheetViews() {
         updateAdapterPlayers()
-
-        // SHOW RV OR INFO
+        // SHOW RV OR INFO MESSAGE
         with(binding.PlayerBottomSheetLayout) {
-            rvPlayersList.isVisible = playersList.isNotEmpty()
-            tvNoPlayersText.isVisible = playersList.isEmpty()
+            rvPlayersList.isVisible = playersAdapter.players.isNotEmpty()
+            tvNoPlayersText.isVisible = playersAdapter.players.isEmpty()
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun updateAdapterPlayers(playersList: MutableList<Player> = players) {
-        playersAdapter.players.clear()
-        playersAdapter.players.addAll(playersList)
-        playersAdapter.notifyDataSetChanged()
+    private fun clearSelectedPlayer() {
+        selectPlayer(null)
+    }
+
+    private fun selectPlayer(player: Player?) {
+        val viewToInvisible: ImageView?
+        val viewToVisible: ImageView?
+
+        if (zeroPlayerWorkInProgress) {
+
+            if (player != null) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                binding.tvOPlayerValue.text = player.name
+                playerO = player
+                viewToInvisible = binding.ivAddZeroPlayer
+                viewToVisible = binding.ivClearZeroPlayer
+            } else {
+                binding.tvOPlayerValue.text = null
+                playerO = null
+                viewToInvisible = binding.ivClearZeroPlayer
+                viewToVisible = binding.ivAddZeroPlayer
+            }
+
+        } else {
+
+            if (player != null) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                binding.tvXPlayerValue.text = player.name
+                playerX = player
+                viewToInvisible = binding.ivAddCrossPlayer
+                viewToVisible = binding.ivClearCrossPlayer
+            } else {
+                binding.tvXPlayerValue.text = null
+                playerX = null
+                viewToInvisible = binding.ivClearCrossPlayer
+                viewToVisible = binding.ivAddCrossPlayer
+            }
+
+        }
+
+        replaceButtonsVisibility(viewToInvisible, viewToVisible)
+        updateAdapterPlayers()
+        checkStartPossibility()
+    }
+
+    private fun checkStartPossibility() {
+        manageStartButtonEnableState(playerX != null && playerO != null)
+    }
+
+    private fun replaceButtonsVisibility(toInvisible: ImageView?, toVisible: ImageView?) {
+        toInvisible?.isVisible = false
+        toVisible?.isVisible = true
+    }
+
+    private fun clickOnSavePlayerButton() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val playerExist = isPlayerExist()
+            showCreateMessage(playerExist)
+
+            if (!playerExist) {
+                val newPlayersList = async(Dispatchers.IO) {
+                    viewModel.savePlayer(binding.etCreatePlayer.text.toString().trim())
+                    viewModel.getPlayers().toMutableList()
+                }
+                players = newPlayersList.await()
+                updateAdapterPlayers()
+                binding.etCreatePlayer.text = null
+                hideKeyboard()
+            }
+        }
     }
 
     private fun isPlayerExist(): Boolean {
@@ -212,19 +287,39 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
         return playerNames.contains(binding.etCreatePlayer.text.toString().trim())
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateAdapterPlayers(playersList: MutableList<Player> = players) {
+        val filteredPlayers = filterSelectedPlayers(playersList)
+        playersAdapter.players.clear()
+        playersAdapter.players.addAll(filteredPlayers)
+        playersAdapter.notifyDataSetChanged()
+    }
+
+    private fun filterSelectedPlayers(playersList: MutableList<Player>): MutableList<Player> {
+        val selectedNames = setOf(
+            binding.tvXPlayerValue.text.toString(),
+            binding.tvOPlayerValue.text.toString(),
+        )
+
+        return playersList.filterNot { player: Player ->
+            player.name in selectedNames
+        }.toMutableList()
+    }
+
     private suspend fun showCreateMessage(playerExists: Boolean) {
         createInfoJob?.cancel()
         createInfoJob = viewLifecycleOwner.lifecycleScope.launch {
             if (playerExists) {
                 binding.tvNewPlayerInfo.setTextColor(requireContext().getColor(R.color.crimson))
-                binding.tvNewPlayerInfo.text = requireContext().getString(R.string.player_not_created)
+                binding.tvNewPlayerInfo.text =
+                    requireContext().getString(R.string.player_not_created)
             } else {
                 binding.tvNewPlayerInfo.setTextColor(requireContext().getColor(R.color.grey_pale))
                 binding.tvNewPlayerInfo.text = requireContext().getString(R.string.player_created)
             }
 
             binding.tvNewPlayerInfo.isVisible = true
-            delay(CREATE_INFO_TIMER)
+            delay(CREATE_INFO_VISIBILITY_TIMER)
             binding.tvNewPlayerInfo.isVisible = false
         }
     }
@@ -251,7 +346,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
         }
     }
 
-    private fun manageStartButtonEnabledState(enabled: Boolean) {
+    private fun manageStartButtonEnableState(enabled: Boolean) {
         with(binding.btnStart) {
             isEnabled = enabled
             alpha = if (enabled) 1f else 0.2f
@@ -265,21 +360,33 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     }
 
     private fun veilFadeControl(slideOffset: Float): Float {
-        val alphaDarkBoost: Float
+        val alphaVeilBoost: Float
         val alphaDelta: Float
 
         if (slideOffset >= 0) {
-            alphaDarkBoost = 0.6f
+            alphaVeilBoost = 0.6f
             alphaDelta = 0.4f * slideOffset
         } else {
-            alphaDarkBoost = 0.6f
+            alphaVeilBoost = 0.6f
             alphaDelta = 0.6f * slideOffset
         }
-        return alphaDarkBoost + alphaDelta
+        return alphaVeilBoost + alphaDelta
+    }
+
+    private fun clickDebounce(): Boolean {
+        val current = isClickAllowed
+        if (isClickAllowed) {
+            isClickAllowed = false
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(CLICK_DEBOUNCE_DELAY)
+                isClickAllowed = true
+            }
+        }
+        return current
     }
 
     companion object {
-        const val CREATE_INFO_TIMER = 2500L
+        const val CREATE_INFO_VISIBILITY_TIMER = 2500L
+        const val CLICK_DEBOUNCE_DELAY = 1000L
     }
-
 }

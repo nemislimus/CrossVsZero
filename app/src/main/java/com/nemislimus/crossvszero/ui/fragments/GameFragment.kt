@@ -25,13 +25,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class GameFragment : BindingFragment<FragmentGameBinding>() {
 
     private lateinit var animationFadeIn: Animation
     private lateinit var fieldCellsViews: List<ImageView>
 
-    private val viewModel by viewModel<GameFragmentViewModel>()
+    private var crossPlayerName: String? = null
+    private var zeroPlayerName: String? = null
+    private var playersNamesExist = false
+
+    private val viewModel by viewModel<GameFragmentViewModel> {
+        parametersOf(
+            crossPlayerName,
+            zeroPlayerName,
+        )
+    }
 
     override fun createFragmentBinding(
         inflater: LayoutInflater,
@@ -58,6 +68,9 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
     }
 
     private fun setStartUiState() {
+        crossPlayerName = requireArguments().getString(CROSS_PLAYER)
+        zeroPlayerName = requireArguments().getString(ZERO_PLAYER)
+        playersNamesExist = areNamesExist(crossPlayerName, zeroPlayerName)
         animationFadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
         binding.fabRestartGameButton.hide()
         binding.fabRestartGameButton.setOnClickListener { viewModel.resetFieldOnButtonClick() }
@@ -75,9 +88,38 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
         }
     }
 
+    private fun areNamesExist(crossName:String?, zeroName: String?): Boolean {
+        return !crossName.isNullOrBlank() && !zeroName.isNullOrBlank()
+    }
+
     private fun markOfTurn(value: Boolean) {
-        val infoText = if (value) getString(R.string.zero_turn) else getString(R.string.cross_turn)
-        binding.tvInfoText.text = infoText
+        binding.tvInfoText.text = createMessageWithName(value)
+    }
+
+    private fun createMessageWithName(isZeroTurn: Boolean, hasWin: Boolean = false): String {
+        val message: String
+        if (hasWin) {
+            message = if (playersNamesExist) {
+                (if (isZeroTurn) {
+                    "$zeroPlayerName ${getString(R.string.win)}"
+                } else {
+                    "$crossPlayerName ${getString(R.string.win)}"
+                }).toString()
+            } else {
+                if (isZeroTurn) getString(R.string.zero_win) else getString(R.string.cross_win)
+            }
+        } else {
+            message = if (playersNamesExist) {
+                (if (isZeroTurn) {
+                    "$zeroPlayerName ${getString(R.string.turn)}"
+                } else {
+                    "$crossPlayerName ${getString(R.string.turn)}"
+                }).toString()
+            } else {
+                if (isZeroTurn) getString(R.string.zero_turn) else getString(R.string.cross_turn)
+            }
+        }
+        return message
     }
 
     private fun setFieldCellsViews(): MutableList<ImageView> {
@@ -147,7 +189,7 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
             tvInfoText.setTextColor(requireContext().getColor(R.color.crimson))
 
             val infoText = if (winCellsIndexes.isNotEmpty()) {
-                if (zeroTurn) getString(R.string.zero_wins) else getString(R.string.cross_wins)
+                createMessageWithName(zeroTurn, true)
             } else {
                 getString(R.string.no_winner)
             }
@@ -226,15 +268,12 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
     }
 
     companion object {
-        const val CROSS_PLAYER = "cross_player"
-        const val ZERO_PLAYER = "zero_player"
+        private const val CROSS_PLAYER = "cross_player"
+        private const val ZERO_PLAYER = "zero_player"
 
-        fun newInstance(newsId: Int) = GameFragment().apply {
-            arguments = bundleOf(
-                CROSS_PLAYER to newsId,
-                ZERO_PLAYER to newsId
-            )
-        }
+        fun createArguments(xPlayerName: String?, oPlayerName: String?): Bundle = bundleOf(
+            CROSS_PLAYER to xPlayerName,
+            ZERO_PLAYER to oPlayerName,
+        )
     }
-
 }

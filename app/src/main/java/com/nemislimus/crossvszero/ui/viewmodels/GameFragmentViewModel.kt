@@ -3,12 +3,23 @@ package com.nemislimus.crossvszero.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.nemislimus.crossvszero.domain.api.ClassicGameRepository
+import com.nemislimus.crossvszero.domain.api.PlayersRepository
+import com.nemislimus.crossvszero.domain.models.Player
 import com.nemislimus.crossvszero.ui.models.GameState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class GameFragmentViewModel(
-    private val repository: ClassicGameRepository
+    private val gameRepository: ClassicGameRepository,
+    private val playersRepository: PlayersRepository,
+    private val nameOfCross: String?,
+    private val nameOfZero: String?,
 ) : ViewModel() {
+
+    private var playerX: Player? = null
+    private var playerO: Player? = null
 
     var weakElementIndex: Int? = null
 
@@ -20,7 +31,13 @@ class GameFragmentViewModel(
     fun isZeroTurn(): LiveData<Boolean> = isZeroTurn
 
     init {
-        whoIsFirst()
+        viewModelScope.launch {
+            val playersJob = launch(Dispatchers.IO) {
+                setPlayers(nameOfCross, nameOfZero)
+            }
+            playersJob.join()
+            whoIsFirst()
+        }
     }
 
     private fun setGameState(state: GameState) {
@@ -28,12 +45,12 @@ class GameFragmentViewModel(
     }
 
     private fun winCheck(): Boolean {
-        return if (repository.winCheck()) {
+        return if (gameRepository.winCheck()) {
             setGameState(
                 GameState.GotWinner(
-                    repository.getPlayerCells(),
-                    repository.getWinCellsIndexes(),
-                    repository.isZeroTurn()
+                    gameRepository.getPlayerCells(),
+                    gameRepository.getWinCellsIndexes(),
+                    gameRepository.isZeroTurn()
                 )
             )
             true
@@ -41,12 +58,12 @@ class GameFragmentViewModel(
     }
 
     private fun checkFieldFilling(): Boolean {
-        return if (repository.checkFieldFilling()) {
+        return if (gameRepository.checkFieldFilling()) {
             setGameState(
                 GameState.NoWinner(
-                    repository.getPlayerCells(),
-                    repository.getWinCellsIndexes(),
-                    repository.isZeroTurn()
+                    gameRepository.getPlayerCells(),
+                    gameRepository.getWinCellsIndexes(),
+                    gameRepository.isZeroTurn()
                 )
             )
             true
@@ -54,22 +71,22 @@ class GameFragmentViewModel(
     }
 
     private fun switchPlayer() {
-        repository.switchPlayer()
-        isZeroTurn.postValue(repository.isZeroTurn())
+        gameRepository.switchPlayer()
+        isZeroTurn.postValue(gameRepository.isZeroTurn())
     }
 
     fun clickOnCell(index: Int) {
-        repository.setFieldCellValue(index)
+        gameRepository.setFieldCellValue(index)
         if (winCheck()) return
         if (checkFieldFilling()) return
-        val indexOfWeakElement = repository.getWeakElementIndex()
+        val indexOfWeakElement = gameRepository.getWeakElementIndex()
 
         setGameState(
             GameState.GameInProcess(
-                repository.getPlayerCells(),
-                repository.getWinCellsIndexes(),
+                gameRepository.getPlayerCells(),
+                gameRepository.getWinCellsIndexes(),
                 indexOfWeakElement,
-                repository.isZeroTurn()
+                gameRepository.isZeroTurn()
             )
         )
         switchPlayer()
@@ -78,17 +95,22 @@ class GameFragmentViewModel(
 
     fun resetFieldOnButtonClick() {
         weakElementIndex = null
-        repository.resetField()
+        gameRepository.resetField()
         setGameState(GameState.NewGame)
     }
 
     fun resetFieldOnExit() {
         weakElementIndex = null
-        repository.resetField()
+        gameRepository.resetField()
+    }
+
+    private suspend fun setPlayers(xName: String?, oName: String?) {
+        xName?.let { playerX = playersRepository.getPlayerByName(it) }
+        oName?.let { playerO = playersRepository.getPlayerByName(it) }
     }
 
     fun whoIsFirst() {
-        isZeroTurn.postValue(repository.whoIsFirst())
+        isZeroTurn.postValue(gameRepository.whoIsFirst())
     }
 
 }

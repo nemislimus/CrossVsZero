@@ -13,8 +13,8 @@ val presentationModule = module {
         MainFragmentViewModel()
     }
 
-    viewModel {
-        GameFragmentViewModel(get())
+    viewModel { (nameOfCross: String?, nameOfZero: String?) ->
+        GameFragmentViewModel(get(), get(), nameOfCross, nameOfZero)
     }
 
     viewModel {

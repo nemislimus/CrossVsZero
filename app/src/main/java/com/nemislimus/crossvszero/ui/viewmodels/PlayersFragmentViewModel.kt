@@ -13,16 +13,8 @@ class PlayersFragmentViewModel(
     private val playersRepository: PlayersRepository,
 ) : ViewModel() {
 
-//    private lateinit var players: List<Player>
-
     private var playersState: MutableLiveData<PlayersState> = MutableLiveData(PlayersState.SelectDisable)
     fun getPlayersState(): LiveData<PlayersState> = playersState
-
-//    init {
-//        viewModelScope.launch {
-//            players = getPlayers()
-//        }
-//    }
 
     suspend fun getPlayers(): List<Player> = playersRepository.getAllPlayers()
 
@@ -35,12 +27,6 @@ class PlayersFragmentViewModel(
         )
         playersRepository.addPlayer(player)
     }
-
-//    fun showPlayersChooseAbility(enable: Boolean) {
-//        playersState.postValue(
-//            if (enable) PlayersState.SelectEnable(players) else PlayersState.SelectDisable
-//        )
-//    }
 
     suspend fun openPlayerSelectionOption(enable: Boolean) {
         if (enable) {
@@ -56,7 +42,5 @@ class PlayersFragmentViewModel(
             playersState.postValue(PlayersState.SelectDisable)
         }
     }
-
-
 
 }
