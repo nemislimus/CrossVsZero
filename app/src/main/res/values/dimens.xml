@@ -2,7 +2,11 @@
 <resources>
     <dimen name="classic_text_44sp">44sp</dimen>
     <dimen name="classic_text_14sp">14sp</dimen>
+    <dimen name="classic_text_16sp">16sp</dimen>
+    <dimen name="classic_text_18sp">18sp</dimen>
+    <dimen name="classic_text_20sp">20sp</dimen>
     <dimen name="classic_text_22sp">22sp</dimen>
+    <dimen name="classic_text_24sp">24sp</dimen>
     <dimen name="classic_size_120dp">120dp</dimen>
     <dimen name="classic_size_56dp">56dp</dimen>
     <dimen name="classic_size_50dp">50dp</dimen>

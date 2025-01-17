@@ -39,6 +39,14 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
             )
         }
 
+        // Info
+        binding.btnInfoButton.setOnClickListener {
+            changeButtonColorOnClick(it)
+            findNavController().navigate(
+                R.id.action_mainFragment_to_infoFragment
+            )
+        }
+
         // Exit
         binding.btnExitButton.setOnClickListener {
             changeButtonColorOnClick(it)

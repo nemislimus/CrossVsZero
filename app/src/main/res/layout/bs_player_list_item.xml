@@ -61,9 +61,11 @@
             android:maxLines="1"
             android:layout_marginStart="@dimen/classic_size_16dp"
             android:layout_marginTop="@dimen/classic_size_4dp"
+            android:layout_marginBottom="@dimen/classic_size_8dp"
             android:textAppearance="@style/smallTextAppearance"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvName"/>
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/tvVictoriesValue"
@@ -90,11 +92,9 @@
             android:maxLines="1"
             android:layout_marginStart="@dimen/classic_size_8dp"
             android:layout_marginTop="@dimen/classic_size_4dp"
-            android:layout_marginBottom="@dimen/classic_size_8dp"
             android:textAppearance="@style/smallTextAppearance"
             app:layout_constraintStart_toStartOf="@id/glCenter"
-            app:layout_constraintTop_toBottomOf="@id/tvName"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
 
         <TextView
             android:id="@+id/tvDefeatsValue"
