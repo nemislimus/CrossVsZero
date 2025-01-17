@@ -83,6 +83,56 @@
         app:layout_constraintStart_toEndOf="@id/mainLeftBorder"
         app:layout_constraintEnd_toStartOf="@id/mainRightBorder"
         app:layout_constraintTop_toBottomOf="@id/mainTopBorder"
+        app:layout_constraintBottom_toTopOf="@id/btnStatButton"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/btnStatButton"
+        style="@style/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:text="@string/stat"
+        android:textSize="@dimen/classic_text_22sp"
+        android:textColor="@color/grey_pale"
+        app:strokeColor="@color/grey_pale"
+        app:strokeWidth="1dp"
+        android:clickable="true"
+        android:fontFamily="@font/prog"
+        android:textFontWeight="300"
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/classic_size_16dp"
+        app:layout_constraintStart_toEndOf="@id/mainLeftBorder"
+        app:layout_constraintEnd_toStartOf="@id/mainRightBorder"
+        app:layout_constraintTop_toBottomOf="@id/btnPlayButton"
+        app:layout_constraintBottom_toTopOf="@id/btnInfoButton"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/btnInfoButton"
+        style="@style/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:text="@string/info"
+        android:textSize="@dimen/classic_text_22sp"
+        android:textColor="@color/grey_pale"
+        app:strokeColor="@color/grey_pale"
+        app:strokeWidth="1dp"
+        android:clickable="true"
+        android:fontFamily="@font/prog"
+        android:textFontWeight="300"
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/classic_size_16dp"
+        app:layout_constraintStart_toEndOf="@id/mainLeftBorder"
+        app:layout_constraintEnd_toStartOf="@id/mainRightBorder"
+        app:layout_constraintTop_toBottomOf="@id/btnStatButton"
         app:layout_constraintBottom_toTopOf="@id/btnExitButton"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -107,7 +157,7 @@
         android:layout_marginTop="@dimen/classic_size_16dp"
         app:layout_constraintStart_toEndOf="@id/mainLeftBorder"
         app:layout_constraintEnd_toStartOf="@id/mainRightBorder"
-        app:layout_constraintTop_toBottomOf="@id/btnPlayButton"
+        app:layout_constraintTop_toBottomOf="@id/btnInfoButton"
         app:layout_constraintBottom_toBottomOf="@id/mainBottomBorder" />
 
     <TextView

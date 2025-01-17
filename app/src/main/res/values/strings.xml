@@ -30,4 +30,20 @@
     <string name="enter_new_player_name">Enter new player name</string>
     <string name="player_not_created">FAILURE:\nPlayer already exists!</string>
     <string name="player_created">SUCCESS:\nPlayer created!</string>
+    <string name="ru">Ru</string>
+    <string name="en">En</string>
+    <string name="title_rules_ru">правила игры:</string>
+    <string name="title_rules_en">game rules:</string>
+    <string name="title_features_en">features:</string>
+    <string name="title_features_ru">особенности:</string>
+    <string name="rules_en">Greetings player!\n\nThe victory conditions in this game are classic - the winner is the one who collected one row of three pieces vertically, horizontally or diagonally.\n\nHowever, now there is a peculiarity in the process of the game. If there are already three pieces on the field, then on the next move the piece that was placed before all the others will be removed from the field. This piece will be specially marked during the player\'s turn.\n\nExample: if a player has made three moves, then after the fourth move the piece that was marked on the first move will be removed, and after the fifth move the piece marked on the second move will be removed, and so on.
+    </string>
+    <string name="rules_ru">Приветствую тебя игрок!\n\nУсловия победы в этой игре классические – победу получает тот, кто собрал один ряд из трёх фигур по вертикали, горизонтали или диагонали.\n\nОднако теперь в процессе игры есть особенность. Если на поле уже присутствует три фигуры игрока, то на следующем ходу с поля будет удалена та фигура игрока, которая была поставлена раньше всех остальных. Такая фигура будет специально отмечена во время хода игрока.\n\nПример: если игрок совершил три хода, то после совершения четвёртого хода будет удалена та фигура, которая была отмечена на первом ходу, а после пятого хода будет удалена фигура, отмеченная на втором ходе и так далее.
+    </string>
+    <string name="features_ru">Вы можете активировать режим выбора игроков, что позволит вам создавать и выбирать участников игры. В таком режиме всегда будут сохраняться результаты игры для каждого из игроков. Это может быть полезно для отслеживания своей статистики или вы можете устраивать небольшие чемпионаты.
+    </string>
+    <string name="features_en">You can activate the player selection mode, which allows you to create and select the participants of the game. This mode will always save the game results for each player. This can be useful for tracking your statistics or you can organize small championships.
+    </string>
+    <string name="stat">STAT</string>
+    <string name="info">INFO</string>
 </resources>
