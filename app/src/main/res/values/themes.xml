@@ -15,8 +15,8 @@
         <item name="appBackgroundColor">@color/dark</item>
         <item name="elementColorGrey">@color/grey_pale</item>
         <item name="elementColorCrimson">@color/crimson</item>
-        <item name="colorPrimary">@color/dark</item>
-        <item name="colorOnPrimary">@color/grey_pale</item>
+        <item name="colorPrimary">@color/grey_pale</item>
+        <item name="colorOnPrimary">@color/dark</item>
         <item name="colorSecondary">@color/crimson</item>
     </style>
 </resources>

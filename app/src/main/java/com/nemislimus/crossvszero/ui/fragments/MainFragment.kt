@@ -35,7 +35,7 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
         binding.btnPlayButton.setOnClickListener {
             changeButtonColorOnClick(it)
             findNavController().navigate(
-                R.id.action_mainFragment_to_gameFragment
+                R.id.action_mainFragment_to_playersFragment
             )
         }
 

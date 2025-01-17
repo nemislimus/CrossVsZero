@@ -11,12 +11,8 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_gameFragment"
-            app:destination="@id/gameFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/hold"
-            app:popEnterAnim="@anim/hold"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_mainFragment_to_playersFragment"
+            app:destination="@id/playersFragment" />
     </fragment>
 
     <fragment
@@ -24,5 +20,14 @@
         android:name="com.nemislimus.crossvszero.ui.fragments.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" />
+    <fragment
+        android:id="@+id/playersFragment"
+        android:name="com.nemislimus.crossvszero.ui.fragments.PlayersFragment"
+        android:label="fragment_players"
+        tools:layout="@layout/fragment_players" >
+        <action
+            android:id="@+id/action_playersFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
 
 </navigation>
