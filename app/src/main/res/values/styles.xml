@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="menuButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="shapeAppearance">@style/menuButtonAppearance</item>
+    </style>
+
+    <style name="menuButtonAppearance" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">@dimen/classic_size_8dp</item>
+    </style>
+
+    <style name="bigTextAppearance">
+        <item name="fontFamily">@font/prog</item>
+        <item name="android:textSize">@dimen/classic_text_22sp</item>
+        <item name="android:textFontWeight">400</item>
+    </style>
+
+    <style name="smallTextAppearance" parent="bigTextAppearance">
+        <item name="android:textSize">@dimen/classic_text_14sp</item>
+    </style>
+
+    <style name="StatisticPopupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textSize">@dimen/classic_text_14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/prog</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:backgroundTint">@color/grey_pale</item>
+    </style>
+
+</resources>

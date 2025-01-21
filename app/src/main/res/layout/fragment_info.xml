@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/appBackgroundColor"
+    tools:context=".ui.fragments.InfoFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/infoRightBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/infoLeftBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbInfoToolBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/arrow_back_dots"
+        app:layout_constrainedWidth="true"
+        app:titleTextColor="@color/grey_pale"
+        app:titleTextAppearance="@style/bigTextAppearance"
+        app:title="@string/game_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRuSelect"
+        android:layout_width="@dimen/classic_size_32dp"
+        android:layout_height="@dimen/classic_size_32dp"
+        android:backgroundTint="@android:color/transparent"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/grey_pale"
+        app:cornerRadius="@dimen/classic_size_32dp"
+        android:stateListAnimator="@null"
+        android:padding="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/ru"
+        android:textAppearance="@style/bigTextAppearance"
+        android:textColor="@color/grey_pale"
+        android:textSize="@dimen/classic_text_20sp"
+        android:layout_marginTop="@dimen/classic_size_32dp"
+        app:layout_constraintEnd_toEndOf="@id/infoRightBorder"
+        app:layout_constraintTop_toBottomOf="@id/tbInfoToolBar" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEnSelect"
+        android:layout_width="@dimen/classic_size_32dp"
+        android:layout_height="@dimen/classic_size_32dp"
+        android:backgroundTint="@android:color/transparent"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/crimson"
+        app:cornerRadius="@dimen/classic_size_32dp"
+        android:stateListAnimator="@null"
+        android:padding="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/en"
+        android:textAppearance="@style/bigTextAppearance"
+        android:textColor="@color/crimson"
+        android:textSize="@dimen/classic_text_20sp"
+        android:layout_marginEnd="@dimen/classic_size_24dp"
+        app:layout_constraintEnd_toStartOf="@id/btnRuSelect"
+        app:layout_constraintTop_toTopOf="@id/btnRuSelect"
+        app:layout_constraintBottom_toBottomOf="@id/btnRuSelect" />
+
+    <ScrollView
+        android:id="@+id/slAllText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/classic_size_24dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="@id/infoLeftBorder"
+        app:layout_constraintEnd_toEndOf="@id/infoRightBorder"
+        app:layout_constraintTop_toBottomOf="@id/btnRuSelect"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvRuleTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|top"
+                android:fontFamily="@font/prog"
+                android:lineSpacingExtra="@dimen/classic_size_4dp"
+                android:text="@string/title_rules_en"
+                android:textColor="@color/grey_pale"
+                android:textAppearance="@style/bigTextAppearance"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_marginVertical="@dimen/classic_size_16dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvRulesText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|top"
+                android:fontFamily="@font/prog"
+                android:lineSpacingExtra="@dimen/classic_size_4dp"
+                android:text="@string/rules_en"
+                android:textColor="@color/grey_pale"
+                android:textSize="@dimen/classic_text_18sp"
+                android:textAppearance="@style/bigTextAppearance"
+                android:textAllCaps="false"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvFeaturesTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|top"
+                android:fontFamily="@font/prog"
+                android:lineSpacingExtra="@dimen/classic_size_4dp"
+                android:text="@string/title_features_en"
+                android:textColor="@color/grey_pale"
+                android:textAppearance="@style/bigTextAppearance"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_marginTop="@dimen/classic_size_24dp"
+                android:layout_marginBottom="@dimen/classic_size_16dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvFeaturesText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|top"
+                android:fontFamily="@font/prog"
+                android:lineSpacingExtra="@dimen/classic_size_4dp"
+                android:text="@string/features_en"
+                android:textColor="@color/grey_pale"
+                android:textSize="@dimen/classic_text_18sp"
+                android:textAppearance="@style/bigTextAppearance"
+                android:textAllCaps="false"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
