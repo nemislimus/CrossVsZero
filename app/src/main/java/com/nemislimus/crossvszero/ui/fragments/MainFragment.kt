@@ -47,6 +47,14 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
             )
         }
 
+        // Stat
+        binding.btnStatButton.setOnClickListener {
+            changeButtonColorOnClick(it)
+            findNavController().navigate(
+                R.id.action_mainFragment_to_statisticFragment
+            )
+        }
+
         // Exit
         binding.btnExitButton.setOnClickListener {
             changeButtonColorOnClick(it)

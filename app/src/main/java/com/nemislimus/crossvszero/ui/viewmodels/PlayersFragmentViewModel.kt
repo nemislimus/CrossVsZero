@@ -28,7 +28,7 @@ class PlayersFragmentViewModel(
         playersRepository.addPlayer(player)
     }
 
-    suspend fun openPlayerSelectionOption(enable: Boolean) {
+    suspend fun managePlayerSelectionOption(enable: Boolean) {
         if (enable) {
             viewModelScope.launch {
                 var players: List<Player> = emptyList()

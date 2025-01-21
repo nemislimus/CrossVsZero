@@ -42,7 +42,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     private var playerO: Player? = null
     private var zeroPlayerWorkInProgress = false
 
-    private val playersAdapter = PlayersAdapter { if (clickDebounce()) selectPlayer(it) }
+    private val playersAdapter = PlayersAdapter(false, null) { if (clickDebounce()) selectPlayer(it) }
 
     override fun createFragmentBinding(
         inflater: LayoutInflater,
@@ -118,7 +118,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
         binding.swChoiceSwitch.setOnCheckedChangeListener { _, checked ->
             manageStartButtonEnableState(!checked)
             viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.openPlayerSelectionOption(checked)
+                viewModel.managePlayerSelectionOption(checked)
             }
         }
 
@@ -275,7 +275,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
                     viewModel.getPlayers().toMutableList()
                 }
                 players = newPlayersList.await()
-                updateAdapterPlayers()
+                configureBottomSheetViews()
                 binding.etCreatePlayer.text = null
                 hideKeyboard()
             }
