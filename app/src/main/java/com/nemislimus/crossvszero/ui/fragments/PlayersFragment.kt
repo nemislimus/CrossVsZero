@@ -140,25 +140,30 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
             if (clickDebounce()) {
                 changeSavePlayerButtonColorOnClick(it)
                 clickOnSavePlayerButton()
+                binding.etCreatePlayer.clearFocus()
             }
         }
 
         binding.ivAddCrossPlayer.setOnClickListener {
             addPlayerToGame(isZeroChoosing = false)
+            binding.etCreatePlayer.clearFocus()
         }
 
         binding.ivClearCrossPlayer.setOnClickListener {
             zeroPlayerWorkInProgress = false
             clearSelectedPlayer()
+            binding.etCreatePlayer.clearFocus()
         }
 
         binding.ivAddZeroPlayer.setOnClickListener {
             addPlayerToGame(isZeroChoosing = true)
+            binding.etCreatePlayer.clearFocus()
         }
 
         binding.ivClearZeroPlayer.setOnClickListener {
             zeroPlayerWorkInProgress = true
             clearSelectedPlayer()
+            binding.etCreatePlayer.clearFocus()
         }
 
     }
