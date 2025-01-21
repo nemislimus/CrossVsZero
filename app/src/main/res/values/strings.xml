@@ -19,7 +19,7 @@
     <string name="name">Name:</string>
     <string name="victories">Victories:</string>
     <string name="defeats">Defeats:</string>
-    <string name="player_list_is_empty">PLAYER LIST IS EMPTY</string>
+    <string name="players_list_is_empty">PLAYERS LIST IS EMPTY</string>
     <string name="x_player">X-PLAYER:</string>
     <string name="o_player">O-PLAYER:</string>
     <string name="add_x_player_description">add x-player</string>
@@ -38,7 +38,7 @@
     <string name="title_features_ru">особенности:</string>
     <string name="rules_en">Greetings player!\n\nThe victory conditions in this game are classic - the winner is the one who collected one row of three pieces vertically, horizontally or diagonally.\n\nHowever, now there is a peculiarity in the process of the game. If there are already three pieces on the field, then on the next move the piece that was placed before all the others will be removed from the field. This piece will be specially marked during the player\'s turn.\n\nExample: if a player has made three moves, then after the fourth move the piece that was marked on the first move will be removed, and after the fifth move the piece marked on the second move will be removed, and so on.
     </string>
-    <string name="rules_ru">Приветствую тебя игрок!\n\nУсловия победы в этой игре классические – победу получает тот, кто собрал один ряд из трёх фигур по вертикали, горизонтали или диагонали.\n\nОднако теперь в процессе игры есть особенность. Если на поле уже присутствует три фигуры игрока, то на следующем ходу с поля будет удалена та фигура игрока, которая была поставлена раньше всех остальных. Такая фигура будет специально отмечена во время хода игрока.\n\nПример: если игрок совершил три хода, то после совершения четвёртого хода будет удалена та фигура, которая была отмечена на первом ходу, а после пятого хода будет удалена фигура, отмеченная на втором ходе и так далее.
+    <string name="rules_ru">Приветствую тебя игрок!\n\nУсловия победы в этой игре классические – победу получает тот, кто собрал один ряд из трёх фигур по вертикали, горизонтали или диагонали.\n\nОднако теперь в процессе игры есть особенность. Если на поле уже присутствует три фигуры игрока, то на следующем ходу с поля будет удалена та фигура игрока, которая была поставлена раньше всех остальных. Такая фигура будет специально отмечена во время хода игрока.\n\nПример: если игрок сделал три хода, то после совершения четвёртого хода будет удалена та фигура, которая была отмечена на первом ходу, а после пятого хода исчезнет фигура, отмеченная на втором ходе и так далее.
     </string>
     <string name="features_ru">Вы можете активировать режим выбора игроков, что позволит вам создавать и выбирать участников игры. В таком режиме всегда будут сохраняться результаты игры для каждого из игроков. Это может быть полезно для отслеживания своей статистики или вы можете устраивать небольшие чемпионаты.
     </string>
@@ -46,4 +46,11 @@
     </string>
     <string name="stat">STAT</string>
     <string name="info">INFO</string>
+    <string name="statistic_title">players statistic:</string>
+    <string name="no_statistic">NO STATISTIC\n\nYou must create the players!</string>
+    <string name="delete_player">delete_player</string>
+    <string name="unknown_viewholder_create">Unknown ViewHolder type for create</string>
+    <string name="unknown_viewholder_bind">Unknown ViewHolder type for bind</string>
+    <string name="clean_up_statistic">Clean up statistic</string>
+    <string name="delete_player_menu">Delete player</string>
 </resources>
