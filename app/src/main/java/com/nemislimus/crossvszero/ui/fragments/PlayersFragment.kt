@@ -42,7 +42,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     private var playerO: Player? = null
     private var zeroPlayerWorkInProgress = false
 
-    private val playersAdapter = PlayersAdapter(false, null) { if (clickDebounce()) selectPlayer(it) }
+    private val playersAdapter = PlayersAdapter(false, null) { if (clickDebounce()) selectOrClearPlayer(it) }
 
     override fun createFragmentBinding(
         inflater: LayoutInflater,
@@ -144,9 +144,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
         }
 
         binding.ivAddCrossPlayer.setOnClickListener {
-            zeroPlayerWorkInProgress = false
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            hideKeyboard()
+            addPlayerToGame(isZeroChoosing = false)
         }
 
         binding.ivClearCrossPlayer.setOnClickListener {
@@ -155,9 +153,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
         }
 
         binding.ivAddZeroPlayer.setOnClickListener {
-            zeroPlayerWorkInProgress = true
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            hideKeyboard()
+            addPlayerToGame(isZeroChoosing = true)
         }
 
         binding.ivClearZeroPlayer.setOnClickListener {
@@ -200,6 +196,11 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
         configureBottomSheetViews()
     }
 
+    private fun addPlayerToGame(isZeroChoosing: Boolean) {
+        zeroPlayerWorkInProgress = isZeroChoosing
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        hideKeyboard()
+    }
 
     private fun configureBottomSheetViews() {
         updateAdapterPlayers()
@@ -211,10 +212,11 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     }
 
     private fun clearSelectedPlayer() {
-        selectPlayer(null)
+        selectOrClearPlayer(null)
     }
 
-    private fun selectPlayer(player: Player?) {
+    // If argument is null - player will detach from game
+    private fun selectOrClearPlayer(player: Player?) {
         val viewToInvisible: ImageView?
         val viewToVisible: ImageView?
 
@@ -251,7 +253,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
         }
 
         replaceButtonsVisibility(viewToInvisible, viewToVisible)
-        updateAdapterPlayers()
+        configureBottomSheetViews()
         checkStartPossibility()
     }
 
