@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.bundle.bundleOf
@@ -75,10 +76,6 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
         binding.fabRestartGameButton.hide()
         binding.fabRestartGameButton.setOnClickListener { viewModel.resetFieldOnButtonClick() }
 
-        viewModel.isZeroTurn().observe(viewLifecycleOwner) { value ->
-            markOfTurn(value)
-        }
-
         binding.tbGameToolBar.setOnClickListener {
             viewModel.resetFieldOnExit()
             findNavController().popBackStack(
@@ -86,6 +83,21 @@ class GameFragment : BindingFragment<FragmentGameBinding>() {
                 inclusive = false
             )
         }
+
+        val backPressedCallback = object : OnBackPressedCallback(enabled = true) {
+            override fun handleOnBackPressed() {
+                viewModel.resetFieldOnExit()
+                findNavController().navigateUp()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressedCallback)
+
+        viewModel.isZeroTurn().observe(viewLifecycleOwner) { value ->
+            markOfTurn(value)
+        }
+
+
     }
 
     private fun areNamesExist(crossName: String?, zeroName: String?): Boolean {

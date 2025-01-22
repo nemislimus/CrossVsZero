@@ -196,6 +196,7 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     }
 
     private fun showSelectionEnable(allPlayersFromDb: List<Player>) {
+        if (players.isNotEmpty()) players.clear()
         players.addAll(allPlayersFromDb)
         binding.grSelectPlayerInterface.isVisible = true
         configureBottomSheetViews()
@@ -214,6 +215,14 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
             rvPlayersList.isVisible = playersAdapter.players.isNotEmpty()
             tvNoPlayersText.isVisible = playersAdapter.players.isEmpty()
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateAdapterPlayers(playersList: MutableList<Player> = players) {
+        val filteredPlayers = filterSelectedPlayers(playersList)
+        playersAdapter.players.clear()
+        playersAdapter.players.addAll(filteredPlayers)
+        playersAdapter.notifyDataSetChanged()
     }
 
     private fun clearSelectedPlayer() {
@@ -292,14 +301,6 @@ class PlayersFragment : BindingFragment<FragmentPlayersBinding>() {
     private fun isPlayerExist(): Boolean {
         val playerNames = players.map { player -> player.name }.toSet()
         return playerNames.contains(binding.etCreatePlayer.text.toString().trim())
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun updateAdapterPlayers(playersList: MutableList<Player> = players) {
-        val filteredPlayers = filterSelectedPlayers(playersList)
-        playersAdapter.players.clear()
-        playersAdapter.players.addAll(filteredPlayers)
-        playersAdapter.notifyDataSetChanged()
     }
 
     private fun filterSelectedPlayers(playersList: MutableList<Player>): MutableList<Player> {

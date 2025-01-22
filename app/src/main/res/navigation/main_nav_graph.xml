@@ -26,6 +26,7 @@
         android:name="com.nemislimus.crossvszero.ui.fragments.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game" />
+
     <fragment
         android:id="@+id/playersFragment"
         android:name="com.nemislimus.crossvszero.ui.fragments.PlayersFragment"
@@ -35,11 +36,13 @@
             android:id="@+id/action_playersFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.nemislimus.crossvszero.ui.fragments.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
+
     <fragment
         android:id="@+id/statisticFragment"
         android:name="com.nemislimus.crossvszero.ui.fragments.StatisticFragment"
