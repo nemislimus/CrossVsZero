@@ -16,18 +16,27 @@
 Дополнительно есть возможность создавать учётные записи игроков и вести статистику побед и
 поражений.
 
-## Технологии проекта:
-
-Приложение написано на языке Kotlin.
-В качестве шаблона проектирования архитектуры использовался MVVM с Single Activity подходом и
-навигацией через Jetpack Navigation Component.
-Для работы с базой данных используется библиотека Room.
-Внедрение зависимостей осуществляет Koin.
-
 ---
 ### Превью проекта:
 
-<p align="center">
+<table>
+  <tr>
+    <td valign="top">
       <img alt="CVZ_demo" src="https://github.com/user-attachments/assets/be9528c9-d760-4f09-a7f2-e22c7c1a9b62" width="260">
-</p>
-
+    </td>
+    <td valign="top">
+      <h2 align="center">CrossVsZero</h2>
+      <img alt="CVZ_logo" src="https://github.com/user-attachments/assets/6b38032c-e5dc-4a85-a10f-e87484cee7ae" width="260">
+      <h2>Технологии проекта:</h2>
+      <ul>
+        <li>Single Activity</li>
+        <li>MVVM Architecture</li>
+        <li>Clean Architecture</li>
+        <li>Jetpack Navigation Component</li>
+        <li>Kotlin & Coroutines</li>
+        <li>Room Database</li>
+        <li>Koin</li>
+      </ul>
+   </td>
+  </tr>
+</table>
