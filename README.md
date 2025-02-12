@@ -23,3 +23,11 @@
 навигацией через Jetpack Navigation Component.
 Для работы с базой данных используется библиотека Room.
 Внедрение зависимостей осуществляет Koin.
+
+---
+### Превью проекта:
+
+<p align="center">
+      <img alt="CVZ_demo" src="https://github.com/user-attachments/assets/be9528c9-d760-4f09-a7f2-e22c7c1a9b62" width="260">
+</p>
+
